@@ -43,6 +43,9 @@ namespace Cliente
             this.DISCONECT = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.lConectados = new System.Windows.Forms.ToolStripMenuItem();
+            this.QUERY1 = new System.Windows.Forms.Button();
+            this.QUERY2 = new System.Windows.Forms.Button();
+            this.QUERY3 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,11 +169,41 @@ namespace Cliente
             this.lConectados.Size = new System.Drawing.Size(101, 24);
             this.lConectados.Text = "Conectados";
             // 
+            // QUERY1
+            // 
+            this.QUERY1.Location = new System.Drawing.Point(408, 213);
+            this.QUERY1.Name = "QUERY1";
+            this.QUERY1.Size = new System.Drawing.Size(368, 46);
+            this.QUERY1.TabIndex = 13;
+            this.QUERY1.Text = "QUERY1";
+            this.QUERY1.UseVisualStyleBackColor = true;
+            // 
+            // QUERY2
+            // 
+            this.QUERY2.Location = new System.Drawing.Point(408, 278);
+            this.QUERY2.Name = "QUERY2";
+            this.QUERY2.Size = new System.Drawing.Size(368, 47);
+            this.QUERY2.TabIndex = 14;
+            this.QUERY2.Text = "QUERY2";
+            this.QUERY2.UseVisualStyleBackColor = true;
+            // 
+            // QUERY3
+            // 
+            this.QUERY3.Location = new System.Drawing.Point(408, 346);
+            this.QUERY3.Name = "QUERY3";
+            this.QUERY3.Size = new System.Drawing.Size(368, 46);
+            this.QUERY3.TabIndex = 15;
+            this.QUERY3.Text = "QUERY3";
+            this.QUERY3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.QUERY3);
+            this.Controls.Add(this.QUERY2);
+            this.Controls.Add(this.QUERY1);
             this.Controls.Add(this.DISCONECT);
             this.Controls.Add(this.SIGNIN);
             this.Controls.Add(this.LOGIN);
@@ -211,6 +244,9 @@ namespace Cliente
         private System.Windows.Forms.Button DISCONECT;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem lConectados;
+        private System.Windows.Forms.Button QUERY1;
+        private System.Windows.Forms.Button QUERY2;
+        private System.Windows.Forms.Button QUERY3;
     }
 }
 

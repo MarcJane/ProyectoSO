@@ -86,6 +86,7 @@ void dameConectados(lConectados *lista, char conectados [300])
 	}
 }
 
+
 int damePos (lConectados * lista, char nombre[20])
 {
 	int i = 0;

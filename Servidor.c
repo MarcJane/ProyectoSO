@@ -29,52 +29,6 @@ void winratio(char nombre[25], char fecha[11],  char respuesta[512]);
 void registrar(char nombre[25], char contrasena[25],  char respuesta[512]);
 void *atenderCliente(void *socket);
 
-int main (int argc, char *argv[])
-{
-	int sock_conn, sock_listen;
-	struct sockaddr_in serv_adr;
-	pthread_t thread;
-	lista.num = 0;
-	int conexion = 0;
-	int sockets[100];
-	int i = 0;
-	//abrimos socket
-	if ((sock_listen = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-		printf("Error creando socket");
-	//hacemos el bind al puerto
-	//Inicaliza en zero serv_adr
-	memset(&serv_adr, 0, sizeof(serv_adr));
-	serv_adr.sin_family = AF_INET;
-	
-	//Asocia el socket a cualquier IP de la maquina
-	//htonl formatea el numero que recibe al formato necessario
-	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
-	//escuchamos en el puerto 9050
-	serv_adr.sin_port = htons(9050);
-	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
-		printf ("Error al bind");
-	
-	//Maximo de peticiones en la cola es de 3
-	if (listen(sock_listen, 3) < 0)
-		printf ("Error en el Linsten");
-	
-	int rc;
-	while(conexion == 0)
-	{
-		printf("Escuchando\n");
-		
-		sock_conn = accept(sock_listen, NULL, NULL);
-		printf("Conexion recibida\n");
-		
-		sockets[i] = sock_conn;
-		
-		rc = pthread_create (&thread, NULL, atenderCliente , &sockets[i]);
-		printf("Code %d = %s\n", rc, strerror(rc));
-		
-		i++;
-	}
-	return 0;
-}
 
 void dameConectados(lConectados *lista, char conectados [300])
 {
@@ -185,7 +139,7 @@ void *atenderCliente (void *socket)
 			p = strtok(NULL, "-");
 			strcpy(fecha, p);
 			printf("Codigo: %d, Fecha: %s\n", codigo, fecha);
-			jugadorPartidaMasLarga(fecha, contestacion);
+			//jugadorPartidaMasLarga(fecha, contestacion);
 			sprintf(respuesta, "%s", contestacion);
 			write (sock_conn,respuesta,strlen(respuesta));
 			pthread_mutex_unlock(&mutex);
@@ -196,7 +150,8 @@ void *atenderCliente (void *socket)
 			p = strtok(NULL, "-");
 			strcpy(fecha, p);		
 			printf("Codigo: %d, Fecha: %s\n", codigo, fecha);
-			jugadorMasPartidas(fecha, contestacion);
+			
+			//jugadorMasPartidas(fecha, contestacion);
 			sprintf(respuesta, "%s", contestacion);
 			write (sock_conn,respuesta,strlen(respuesta));
 			pthread_mutex_unlock(&mutex);
@@ -209,7 +164,7 @@ void *atenderCliente (void *socket)
 			p = strtok(NULL, "-");
 			strcpy(fecha, p);
 			printf("Codigo: %d, Fecha: %s y Nombre: %s\n", codigo, fecha, nombre);
-			winratio(nombre, fecha, contestacion);
+			//winratio(nombre, fecha, contestacion);
 			sprintf(respuesta, "%s", contestacion);
 			write (sock_conn,respuesta,strlen(respuesta));
 			pthread_mutex_unlock(&mutex);
@@ -282,11 +237,12 @@ void acceso(char nombre[25], char contrasena[25], char respuesta[512])
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	strcpy (consulta,"select id from jugador where nombre = '");
+	strcpy (consulta,"select ID from JUGADOR where NOMBRE = '");
 	strcat (consulta, nombre);
 	strcat (consulta,"' and contrase￱a = '");
 	strcat (consulta, contrasena);
 	strcat (consulta,"';");
+	printf ("Consulta = %s\n",consulta);
 	err=mysql_query (conn, consulta); 
 	if (err!=0) 
 	{
@@ -519,6 +475,53 @@ void registrar(char nombre[25], char contrasena[25], char respuesta[512])
 	}
 	
 }
+int main (int argc, char *argv[])
+{
+	int sock_conn, sock_listen;
+	struct sockaddr_in serv_adr;
+	pthread_t thread;
+	lista.num = 0;
+	int conexion = 0;
+	int sockets[100];
+	int i = 0;
+	//abrimos socket
+	if ((sock_listen = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+		printf("Error creando socket");
+	//hacemos el bind al puerto
+	//Inicaliza en zero serv_adr
+	memset(&serv_adr, 0, sizeof(serv_adr));
+	serv_adr.sin_family = AF_INET;
+	
+	//Asocia el socket a cualquier IP de la maquina
+	//htonl formatea el numero que recibe al formato necessario
+	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
+	//escuchamos en el puerto 9050
+	serv_adr.sin_port = htons(9050);
+	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
+		printf ("Error al bind");
+	
+	//Maximo de peticiones en la cola es de 3
+	if (listen(sock_listen, 3) < 0)
+		printf ("Error en el Linsten");
+	
+	int rc;
+	while(conexion == 0)
+	{
+		printf("Escuchando\n");
+		
+		sock_conn = accept(sock_listen, NULL, NULL);
+		printf("Conexion recibida\n");
+		
+		sockets[i] = sock_conn;
+		
+		rc = pthread_create (&thread, NULL, atenderCliente , &sockets[i]);
+		printf("Code %d = %s\n", rc, strerror(rc));
+		
+		i++;
+	}
+	return 0;
+}
+
 
 	
 	

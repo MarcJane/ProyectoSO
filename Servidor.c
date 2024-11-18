@@ -23,9 +23,9 @@ typedef struct {
 lConectados lista;
 
 void acceso(char nombre[25], char contrasena[25],  char respuesta[512]);
-void jugadorPartidaMasLarga(char fecha[11],  char respuesta[512]);
-void jugadorMasPartidas(char fecha[11], char respuesta[512]);
-void winratio(char nombre[25], char fecha[11],  char respuesta[512]);
+void DamePartidasGanadas(char nombre[25]);
+void DameTablaJugadores(char nombre[25]);
+void DameID(char nombre[25]);
 void registrar(char nombre[25], char contrasena[25],  char respuesta[512]);
 void *atenderCliente(void *socket);
 
@@ -85,7 +85,7 @@ int conectar (lConectados *lista, char nombre[20], int socket)
 		strcpy(lista->conectados[lista->num].nombre, nombre);
 		lista->conectados[lista->num].socket = socket;
 		lista->num++;
-		printf("Litsa numero : %d\n", lista->num);
+		printf("Lista numero : %d\n", lista->num);
 		return 0;
 	}
 }
@@ -102,6 +102,7 @@ void *atenderCliente (void *socket)
 	char contestacion[512];
 	char contrasena[20];
 	char nombre[25];
+	char username[25];
 	char fecha[11];
 	char conectados[300];
 	int conexion = 0;
@@ -124,7 +125,7 @@ void *atenderCliente (void *socket)
 			printf("Codigo de conexion: %d\n", r);
 			p = strtok(NULL, "-");
 			strcpy(contrasena, p);
-			printf("Codigo: %d, Nombre: %s y Contraseï¿±a: %s\n", codigo, nombre, contrasena);
+			printf("Codigo: %d, Nombre: %s y Contraseña: %s\n", codigo, nombre, contrasena);
 			acceso(nombre, contrasena, contestacion);
 			if(strcmp (contestacion, "Error") != 0)
 				r = conectar(&lista, nombre, socket);
@@ -223,7 +224,7 @@ void acceso(char nombre[25], char contrasena[25], char respuesta[512])
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", NULL, 0, NULL, 0);
+	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "M6_BBDD", 0, NULL, 0);
 	if (conn==NULL)
 	{
 		printf ("Error al inicializar la conexion: %u %s\n", 
@@ -285,7 +286,7 @@ int DamePartidasGanadas(char nombre[20])
 		exit (1);
 	}
 	//inicializar la conexin
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", "Parchis",0, NULL, 0);
+	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "M6_BBDD",0, NULL, 0);
 	if (conn==NULL) {
 		printf ("Error al inicializar la conexion: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
@@ -338,7 +339,7 @@ int DameTablaJugadores(char username[20])
 		exit (1);
 	}
 	//inicializar la conexion
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", "Parchis",0, NULL, 0);
+	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "M6_BBDD",0, NULL, 0);
 	if (conn==NULL) {
 		printf ("Error al inicializar la conexion: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
@@ -389,7 +390,7 @@ int DameID(char nombre[20])
 		exit (1);
 	}
 	//inicializar la conexion
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", "Parchis", 0, NULL, 0);
+	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "M6_BBDD", 0, NULL, 0);
 	if (conn==NULL) {
 		printf ("Error al inicializar la conexione: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
@@ -439,7 +440,7 @@ void registrar(char nombre[25], char contrasena[25], char respuesta[512])
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", NULL, 0, NULL, 0);
+	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql","M6_BBDD", 0, NULL, 0);
 	if (conn==NULL)
 	{
 		printf ("Error al inicializar la conexion: %u %s\n", 
@@ -478,6 +479,7 @@ void registrar(char nombre[25], char contrasena[25], char respuesta[512])
 int main (int argc, char *argv[])
 {
 	int sock_conn, sock_listen;
+	int puerto = 5060;
 	struct sockaddr_in serv_adr;
 	pthread_t thread;
 	lista.num = 0;
@@ -495,8 +497,8 @@ int main (int argc, char *argv[])
 	//Asocia el socket a cualquier IP de la maquina
 	//htonl formatea el numero que recibe al formato necessario
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
-	//escuchamos en el puerto 9050
-	serv_adr.sin_port = htons(9050);
+	//escuchamos en el puerto 5060
+	serv_adr.sin_port = htons(puerto);
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
 		printf ("Error al bind");
 	

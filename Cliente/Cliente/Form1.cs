@@ -15,13 +15,19 @@ namespace Cliente
 {
     public partial class Form1 : Form
     {
-        Socket server;
+        public Socket server;
         Thread atender;
         string invitados;
         int nInvitados = 0;
+        public static Form1 instance;
+        Form2 form = new Form2();
+        bool anfitrion;
+        int partida;
         public Form1()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
+            instance = this;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -30,13 +36,17 @@ namespace Cliente
         }
         private void atenderServidor()
         {
+            int nAceptada = 0;
+            string[] jugadores = new string[3];
+
             while (true)
             {
+                int i;
                 byte[] msg2 = new byte[80];
                 server.Receive(msg2);
+                string mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
                 string[] trozos = Encoding.ASCII.GetString(msg2).Split('-');
                 int codigo = Convert.ToInt32(trozos[0]);
-                string mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
                 switch (codigo)
                 {
                     case 0:
@@ -44,9 +54,7 @@ namespace Cliente
                         {
                             Invoke(new Action(() =>
                             {
-                                MessageBox.Show("Has accedido a la cuenta");
                                 this.BackColor = Color.Green;
-                                lConectados.BackColor = Color.Green;
                                 menuStrip1.BackColor = Color.Green;
                                 label3.Visible = true;
                                 label4.Visible = true;
@@ -54,6 +62,8 @@ namespace Cliente
                                 NAME.Visible = true;
                                 DATE.Visible = true;
                                 lConectados.Visible = true;
+                                INVITAR.Visible = true;
+                                CANCELAR.Visible = true;
                                 USER.Enabled = false;
                                 PASSWORD.Enabled = false;
                                 SIGNIN.Enabled = true;
@@ -68,15 +78,15 @@ namespace Cliente
                     case 1:
                         if (mensaje != "1-Error")
                         {
-                            int i = 1;
-                            string jugadores = "Los jugadores que jugaron la partida mas larga son : " + mensaje.Split('-')[i];
+                            i = 1;
+                            string jugadoresP = "Los jugadores que jugaron la partida mas larga son : " + mensaje.Split('-')[i];
                             i++;
                             while (i < mensaje.Split('-').Length)
                             {
-                                jugadores = jugadores + " ," + mensaje.Split('-')[i];
+                                jugadoresP = jugadoresP + " ," + mensaje.Split('-')[i];
                                 i++;
                             }
-                            MessageBox.Show(jugadores);
+                            MessageBox.Show(jugadoresP);
                         }
                         if (mensaje == "1-Error")
                         {
@@ -114,8 +124,7 @@ namespace Cliente
                         {
                             Invoke(new Action(() =>
                             {
-                                MessageBox.Show("Registrado correctamente");
-                                MessageBox.Show("Has accedido a la cuenta");
+                                MessageBox.Show("Registrado correctamente, has accedido a la cuenta");
                                 this.BackColor = Color.Green;
                                 lConectados.BackColor = Color.Green;
                                 menuStrip1.BackColor = Color.Green;
@@ -154,18 +163,101 @@ namespace Cliente
                     case 7:
                         if (mensaje != "7-ERROR")
                         {
+                            string peticion;
                             Convert.ToString(mensaje);
-                            string nPartida = mensaje.Split('-')[1];
-                            string invitador = mensaje.Split('-')[2];
-                            MessageBox.Show("El jugador " + invitador + " te ha invitado a jugar");
+                            partida = Convert.ToInt32(trozos[1]);
+                            string invitador = trozos[2];
+                            if (MessageBox.Show("Has sido invitado a jugar por: " + invitador, "Invitacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                peticion = "7-" + partida + "-Yes";
+                                byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
+                                server.Send(enviar);
+                                Invoke(new Action(() =>
+                                {
+                                    form.Show();
+                                }));
+                            }
+                            else
+                            {
+                                peticion = "7-No";
+                                byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
+                                server.Send(enviar);
+                            }
+                        }
+                        break;
+                    case 8:
+                        partida = Convert.ToInt32(trozos[1]);
+                        if (trozos[2] == "Yes")
+                        {
+                            i = 0;
+                            string peticion;
+                            jugadores[nAceptada] = trozos[3];
+                            switch (nAceptada)
+                            {
+                                case 0:
+                                    Form2.instance.l1.Text = jugadores[nAceptada];
+                                    Form2.instance.l1.ForeColor = Color.Green;
+                                    nAceptada++;
+                                    break;
+                                case 1:
+                                    Form2.instance.l2.Text = jugadores[nAceptada];
+                                    Form2.instance.l2.ForeColor = Color.Green;
+                                    nAceptada++;
+                                    break;
+                                case 2:
+                                    Form2.instance.l3.Text = jugadores[nAceptada];
+                                    Form2.instance.l3.ForeColor = Color.Green;
+                                    break;
+                            }
+                            string peticion2 = "-" + USER.Text;
+                            while (jugadores[i] != null)
+                            {
+                                peticion2 = peticion2 + "-" + jugadores[i];
+                                i++;
+                            }
+                            peticion = "9-" + i;
+                            peticion = peticion + peticion2;
+                            byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
+                            server.Send(enviar);
+                        }
+                        break;
+                    case 9:
+                        Form2.instance.l3.Text = Form2.instance.l2.Text;
+                        Form2.instance.l2.Text = Form2.instance.l1.Text;
+                        Form2.instance.l1.Text = Form2.instance.l8.Text;
+                        Form2.instance.l8.Text = trozos[1];
+                        break;
+                    case 10:
+                        i = 1;
+                        Form2.instance.l5.Text = trozos[i];
+                        Form2.instance.l5.ForeColor = Color.Green;
+                        i++;
+                        if (trozos.Length > 2)
+                        {
+                            if (trozos[i] != null && trozos[i] != USER.Text)
+                            {
 
+                                Form2.instance.l6.Text = trozos[i];
+                                Form2.instance.l6.ForeColor = Color.Green;
+                                i++;
 
-                            // Create a new instance of the Form2 class
-                            //Form2 settingsForm = new Form2();
-
-                            // Show the settings form
-                            //settingsForm.Show();
-
+                            }
+                            else if (trozos.Length > 3)
+                            {
+                                i++;
+                                Form2.instance.l6.Text = trozos[i];
+                                Form2.instance.l6.ForeColor = Color.Green;
+                                i++;
+                            }
+                        }
+                        if (trozos.Length > 3)
+                        {
+                            if (trozos[i] != null && trozos[i] != USER.Text)
+                            {
+                                Form2.instance.l7.Text = trozos[i];
+                                Form2.instance.l7.ForeColor = Color.Green;
+                            }
+                            break;
                         }
                         //Recivir una peticion que te permita aceptar o denegar partida y envie una peticion 7-Aceptada o 7-Rechazada
                         break;
@@ -253,7 +345,6 @@ namespace Cliente
                 SIGNIN.Enabled = true;
                 LOGIN.Enabled = true;
                 server.Close();
-                MessageBox.Show("DESCONECTADO DEL SERVIDOR");
             }
             catch (SocketException)
             {
@@ -299,10 +390,18 @@ namespace Cliente
 
         private void Invitar_Click(object sender, EventArgs e)
         {
+            anfitrion = true;
             string invite = "6-" + nInvitados + invitados;
             byte[] mensaje = System.Text.Encoding.ASCII.GetBytes(invite);
 
             server.Send(mensaje);
+            form.Show();
+        }
+        public void enviarMensaje()
+        {
+            string peticion = "8-" + partida + "-" + USER.Text + ": " + Form2.instance.tB.Text;
+            byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
+            server.Send(enviar);
         }
     }
 }

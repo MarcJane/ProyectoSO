@@ -46,8 +46,8 @@ namespace Cliente
             this.QUERY1 = new System.Windows.Forms.Button();
             this.QUERY2 = new System.Windows.Forms.Button();
             this.QUERY3 = new System.Windows.Forms.Button();
-            this.Invitar = new System.Windows.Forms.Button();
-            this.Cancelar = new System.Windows.Forms.Button();
+            this.INVITAR = new System.Windows.Forms.Button();
+            this.CANCELAR = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -198,32 +198,32 @@ namespace Cliente
             this.QUERY3.Text = "QUERY3";
             this.QUERY3.UseVisualStyleBackColor = true;
             // 
-            // Invitar
+            // INVITAR
             // 
-            this.Invitar.Location = new System.Drawing.Point(53, 409);
-            this.Invitar.Name = "Invitar";
-            this.Invitar.Size = new System.Drawing.Size(122, 66);
-            this.Invitar.TabIndex = 16;
-            this.Invitar.Text = "INVITAR";
-            this.Invitar.UseVisualStyleBackColor = true;
-            this.Invitar.Click += new System.EventHandler(this.Invitar_Click);
+            this.INVITAR.Location = new System.Drawing.Point(53, 409);
+            this.INVITAR.Name = "INVITAR";
+            this.INVITAR.Size = new System.Drawing.Size(122, 66);
+            this.INVITAR.TabIndex = 16;
+            this.INVITAR.Text = "INVITAR";
+            this.INVITAR.UseVisualStyleBackColor = true;
+            this.INVITAR.Click += new System.EventHandler(this.Invitar_Click);
             // 
-            // Cancelar
+            // CANCELAR
             // 
-            this.Cancelar.Location = new System.Drawing.Point(224, 409);
-            this.Cancelar.Name = "Cancelar";
-            this.Cancelar.Size = new System.Drawing.Size(122, 66);
-            this.Cancelar.TabIndex = 17;
-            this.Cancelar.Text = "CANCELAR";
-            this.Cancelar.UseVisualStyleBackColor = true;
+            this.CANCELAR.Location = new System.Drawing.Point(224, 409);
+            this.CANCELAR.Name = "CANCELAR";
+            this.CANCELAR.Size = new System.Drawing.Size(122, 66);
+            this.CANCELAR.TabIndex = 17;
+            this.CANCELAR.Text = "CANCELAR";
+            this.CANCELAR.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(976, 536);
-            this.Controls.Add(this.Cancelar);
-            this.Controls.Add(this.Invitar);
+            this.Controls.Add(this.CANCELAR);
+            this.Controls.Add(this.INVITAR);
             this.Controls.Add(this.QUERY3);
             this.Controls.Add(this.QUERY2);
             this.Controls.Add(this.QUERY1);
@@ -270,8 +270,8 @@ namespace Cliente
         private System.Windows.Forms.Button QUERY1;
         private System.Windows.Forms.Button QUERY2;
         private System.Windows.Forms.Button QUERY3;
-        private System.Windows.Forms.Button Invitar;
-        private System.Windows.Forms.Button Cancelar;
+        private System.Windows.Forms.Button INVITAR;
+        private System.Windows.Forms.Button CANCELAR;
     }
 }
 

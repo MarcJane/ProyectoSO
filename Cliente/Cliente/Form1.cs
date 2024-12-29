@@ -62,6 +62,9 @@ namespace Cliente
                                 label5.Visible = true;
                                 NAME.Visible = true;
                                 DATE.Visible = true;
+                                QUERY1.Visible = false;
+                                QUERY2.Visible = false;
+                                QUERY3.Visible = false;
                                 lConectados.Visible = true;
                                 INVITAR.Visible = true;
                                 CANCELAR.Visible = true;
@@ -134,6 +137,11 @@ namespace Cliente
                                 label5.Visible = true;
                                 NAME.Visible = true;
                                 DATE.Visible = true;
+                                QUERY1.Visible = false;
+                                QUERY2.Visible = false;
+                                QUERY3.Visible = false;
+                                INVITAR.Visible = false;
+                                CANCELAR.Visible = false;
                                 lConectados.Visible = true;
                                 USER.Enabled = false;
                                 PASSWORD.Enabled = false;
@@ -286,6 +294,8 @@ namespace Cliente
                             Form2.instance.l4.ForeColor = Color.Green;
                         }
                         break;
+                    case 12:
+                        break;
                 }
             }
         }
@@ -364,6 +374,15 @@ namespace Cliente
                 label5.Visible = false;
                 NAME.Visible = false;
                 DATE.Visible = false;
+                QUERY1.Visible = false;
+                QUERY2.Visible = false;
+                QUERY3.Visible = false;
+                INVITAR.Visible = false;
+                CANCELAR.Visible = false;
+                label6.Visible = false;
+                label7.Visible = false;
+                label8.Visible = false;
+                label9.Visible = false;
                 lConectados.Visible = false;
                 USER.Enabled = true;
                 PASSWORD.Enabled = true;
@@ -400,18 +419,7 @@ namespace Cliente
             MessageBox.Show("Se enviara una invitacion a " + item.Text);
             listaInvitacion(item.Text);
         }
-        private void listaInvitacion(string nombre)
-        {
-            if (nInvitados < 4)
-            {
-                invitados = invitados + "-" + nombre;
-                nInvitados++;
-            }
-            else
-            {
-                MessageBox.Show("Solo se puede invitar un maximo de 4 jugadores");
-            }
-        }
+
         public void EMPEZAR()     //avisa al servidor de que inicie la partida
         {
             string peticion = "11-";
@@ -433,7 +441,36 @@ namespace Cliente
             byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
             server.Send(enviar);
         }
-
+        private void listaInvitacion(string nombre)        //guarda la informacion de la gente que vas a invitar a jugar
+        {
+            label6.Visible = true;
+            INVITAR.Enabled = true;
+            CANCELAR.Enabled = true;
+            if (nInvitados < 3)
+            {
+                invitados = invitados + "-" + nombre;
+                nInvitados++;
+            }
+            else
+            {
+                MessageBox.Show("Solo se puede invitar un maximo de 4 jugadores");
+            }
+            switch (nInvitados)
+            {
+                case 1:
+                    label7.Text = nombre;
+                    label7.Visible = true;
+                    break;
+                case 2:
+                    label8.Text = nombre;
+                    label8.Visible = true;
+                    break;
+                case 3:
+                    label9.Text = nombre;
+                    label9.Visible = true;
+                    break;
+            }
+        }
         private void QUERY1_Click(object sender, EventArgs e)
         {
             try

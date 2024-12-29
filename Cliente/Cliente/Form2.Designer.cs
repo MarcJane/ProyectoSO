@@ -29,10 +29,10 @@ namespace Cliente
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.jugador1 = new System.Windows.Forms.Label();
+            this.jugador2 = new System.Windows.Forms.Label();
+            this.jugador3 = new System.Windows.Forms.Label();
+            this.jugador4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.ENVIAR = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,41 +43,41 @@ namespace Cliente
             this.CERRAR = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // jugador1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(101, 77);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(25, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tu";
+            this.jugador1.AutoSize = true;
+            this.jugador1.Location = new System.Drawing.Point(101, 77);
+            this.jugador1.Name = "jugador1";
+            this.jugador1.Size = new System.Drawing.Size(25, 17);
+            this.jugador1.TabIndex = 0;
+            this.jugador1.Text = "Tu";
             // 
-            // label2
+            // jugador2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(518, 77);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(23, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "J1";
+            this.jugador2.AutoSize = true;
+            this.jugador2.Location = new System.Drawing.Point(518, 77);
+            this.jugador2.Name = "jugador2";
+            this.jugador2.Size = new System.Drawing.Size(23, 17);
+            this.jugador2.TabIndex = 1;
+            this.jugador2.Text = "J1";
             // 
-            // label3
+            // jugador3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(518, 204);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "J3";
+            this.jugador3.AutoSize = true;
+            this.jugador3.Location = new System.Drawing.Point(518, 204);
+            this.jugador3.Name = "jugador3";
+            this.jugador3.Size = new System.Drawing.Size(23, 17);
+            this.jugador3.TabIndex = 2;
+            this.jugador3.Text = "J3";
             // 
-            // label4
+            // jugador4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(104, 204);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(23, 17);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "J2";
+            this.jugador4.AutoSize = true;
+            this.jugador4.Location = new System.Drawing.Point(104, 204);
+            this.jugador4.Name = "jugador4";
+            this.jugador4.Size = new System.Drawing.Size(23, 17);
+            this.jugador4.TabIndex = 3;
+            this.jugador4.Text = "J2";
             // 
             // textBox1
             // 
@@ -161,10 +161,10 @@ namespace Cliente
             this.Controls.Add(this.label5);
             this.Controls.Add(this.ENVIAR);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.jugador4);
+            this.Controls.Add(this.jugador3);
+            this.Controls.Add(this.jugador2);
+            this.Controls.Add(this.jugador1);
             this.Name = "Form2";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
@@ -175,10 +175,10 @@ namespace Cliente
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label jugador1;
+        private System.Windows.Forms.Label jugador2;
+        private System.Windows.Forms.Label jugador3;
+        private System.Windows.Forms.Label jugador4;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button ENVIAR;
         private System.Windows.Forms.Label label5;

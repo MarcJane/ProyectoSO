@@ -27,13 +27,10 @@ namespace Cliente
         {
             InitializeComponent();
             instance = this;
-            l1 = label2;
-            l2 = label3;
-            l3 = label4;
-            l4 = label5;
-            l5 = label6;
-            l6 = label7;
-            l7 = label8;
+            l1 = jugador1;
+            l2 = jugador2;
+            l3 = jugador3;
+            l4 = jugador4;
             tB = textBox1;
         }
 
@@ -57,5 +54,15 @@ namespace Cliente
         {
             this.Close();
         }
-    }
+        public void startAction()       //aparecen los jugadores al iniciar la partida y pueden comenzar a moverse
+        {
+            jugador1.Hide();
+            jugador2.Hide();
+            jugador3.Hide();
+            jugador4.Hide();
+            textBox1.Hide();
+            EMPEZAR.Hide();
+            CERRAR.Hide();
+            ENVIAR.Hide();
+        }
 }

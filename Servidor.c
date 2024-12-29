@@ -275,6 +275,45 @@ void *atenderCliente (void *socket)
 				write (sockets[j],respuesta,strlen(respuesta));
 			}
 		}
+		else if (codigo == 10)
+		{
+			pthread_mutex_lock(&mutex);		//elimina un cliente de la base de datos
+			p = strtok(NULL, "-");
+			char nombre[20];
+			strcpy(nombre, p);
+			eliminarCliente(nombre);
+			pthread_mutex_unlock(&mutex);
+		}
+		else if (codigo == 12)
+		{
+			pthread_mutex_lock(&mutex);		//guarda la informacion de la partida en la base de datos una vez terminada
+			p = strtok(NULL, "-");
+			int ganador = atoi(p);
+			p = strtok(NULL, "-");
+			int puntos1 = atoi(p);
+			p = strtok(NULL, "-");
+			int puntos2 = atoi(p);
+			p = strtok(NULL, "-");
+			int t = atoi(p);
+			p = strtok(NULL, "-");
+			strcpy(fecha, p);
+			finalPartida(t, ganador, puntos1, puntos2, fecha, partida);
+			pthread_mutex_unlock(&mutex);
+		}
+		if (codigo == 0 || codigo == 4 || codigo == 5)
+		{
+			pthread_mutex_lock(&mutex);		//devuelve la lista de conectados cada vez que se actualiza
+			int j;
+			dameConectados(&lista, conectados);
+			sprintf(respuesta, "6-%s", conectados);
+			printf("respuesta: %s\n", respuesta);
+			pthread_mutex_unlock(&mutex);
+			for (j = 0; j < i; j++)
+			{
+				write(sockets[j], respuesta, strlen(respuesta));
+			}
+			pthread_mutex_unlock(&mutex);
+		}
 		printf("Nombre: %s\n", nombre);
 	}
 	close(sock_conn);

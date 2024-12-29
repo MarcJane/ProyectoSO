@@ -237,37 +237,10 @@ namespace Cliente
                         Form2.instance.l8.Text = trozos[1];
                         break;
                     case 10:
-                        i = 1;
-                        Form2.instance.l5.Text = trozos[i];
-                        Form2.instance.l5.ForeColor = Color.Green;
-                        i++;
-                        if (trozos.Length > 2)
+                        Invoke(new Action(() =>
                         {
-                            if (trozos[i] != null && trozos[i] != USER.Text)
-                            {
-
-                                Form2.instance.l6.Text = trozos[i];
-                                Form2.instance.l6.ForeColor = Color.Green;
-                                i++;
-
-                            }
-                            else if (trozos.Length > 3)
-                            {
-                                i++;
-                                Form2.instance.l6.Text = trozos[i];
-                                Form2.instance.l6.ForeColor = Color.Green;
-                                i++;
-                            }
-                        }
-                        if (trozos.Length > 3)
-                        {
-                            if (trozos[i] != null && trozos[i] != USER.Text)
-                            {
-                                Form2.instance.l7.Text = trozos[i];
-                                Form2.instance.l7.ForeColor = Color.Green;
-                            }
-                            break;
-                        }
+                            Form2.instance.startAction();       //inicia la partida
+                        }));
                         //Recivir una peticion que te permita aceptar o denegar partida y envie una peticion 7-Aceptada o 7-Rechazada
                         break;
                     case 11:

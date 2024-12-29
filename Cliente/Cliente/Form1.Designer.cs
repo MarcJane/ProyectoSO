@@ -179,6 +179,7 @@ namespace Cliente
             this.QUERY1.TabIndex = 13;
             this.QUERY1.Text = "QUERY1";
             this.QUERY1.UseVisualStyleBackColor = true;
+            this.QUERY1.Click += new System.EventHandler(this.QUERY1_Click);
             // 
             // QUERY2
             // 
@@ -188,6 +189,7 @@ namespace Cliente
             this.QUERY2.TabIndex = 14;
             this.QUERY2.Text = "QUERY2";
             this.QUERY2.UseVisualStyleBackColor = true;
+            this.QUERY2.Click += new System.EventHandler(this.QUERY2_Click);
             // 
             // QUERY3
             // 
@@ -197,6 +199,7 @@ namespace Cliente
             this.QUERY3.TabIndex = 15;
             this.QUERY3.Text = "QUERY3";
             this.QUERY3.UseVisualStyleBackColor = true;
+            this.QUERY3.Click += new System.EventHandler(this.QUERY3_Click);
             // 
             // INVITAR
             // 

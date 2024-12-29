@@ -47,5 +47,15 @@ namespace Cliente
             Form1.instance.enviarMensaje();
             textBox1.Clear();
         }
+
+        private void EMPEZAR_Click(object sender, EventArgs e)
+        {
+            Form1.instance.EMPEZAR();
+        }
+
+        private void CERRAR_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

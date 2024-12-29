@@ -39,6 +39,8 @@ namespace Cliente
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.EMPEZAR = new System.Windows.Forms.Button();
+            this.CERRAR = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -126,11 +128,33 @@ namespace Cliente
             this.label8.Size = new System.Drawing.Size(0, 17);
             this.label8.TabIndex = 9;
             // 
+            // EMPEZAR
+            // 
+            this.EMPEZAR.Location = new System.Drawing.Point(589, 252);
+            this.EMPEZAR.Name = "EMPEZAR";
+            this.EMPEZAR.Size = new System.Drawing.Size(129, 44);
+            this.EMPEZAR.TabIndex = 10;
+            this.EMPEZAR.Text = "EMPEZAR";
+            this.EMPEZAR.UseVisualStyleBackColor = true;
+            this.EMPEZAR.Click += new System.EventHandler(this.EMPEZAR_Click);
+            // 
+            // CERRAR
+            // 
+            this.CERRAR.Location = new System.Drawing.Point(615, 302);
+            this.CERRAR.Name = "CERRAR";
+            this.CERRAR.Size = new System.Drawing.Size(85, 45);
+            this.CERRAR.TabIndex = 11;
+            this.CERRAR.Text = "CERRAR";
+            this.CERRAR.UseVisualStyleBackColor = true;
+            this.CERRAR.Click += new System.EventHandler(this.CERRAR_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CERRAR);
+            this.Controls.Add(this.EMPEZAR);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -161,5 +185,7 @@ namespace Cliente
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button EMPEZAR;
+        private System.Windows.Forms.Button CERRAR;
     }
 }

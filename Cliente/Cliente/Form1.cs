@@ -21,6 +21,7 @@ namespace Cliente
         int nInvitados = 0;
         public static Form1 instance;
         Form2 form = new Form2();
+        public int J;
         bool anfitrion;
         int partida;
         public Form1()
@@ -261,6 +262,30 @@ namespace Cliente
                         }
                         //Recivir una peticion que te permita aceptar o denegar partida y envie una peticion 7-Aceptada o 7-Rechazada
                         break;
+                    case 11:
+                        J = Convert.ToInt32(trozos[1]);     //cuando la gente se va uniendo a la partida va añadiendo su nombre a los jugadores y los pone en verde
+                        Invoke(new Action(() =>
+                        {
+                            form.Show();
+                        }));
+                        Form2.instance.l1.Text = trozos[2];
+                        Form2.instance.l1.ForeColor = Color.Green;
+                        if (trozos.Length > 3)
+                        {
+                            Form2.instance.l3.Text = trozos[3];
+                            Form2.instance.l3.ForeColor = Color.Green;
+                        }
+                        if (trozos.Length > 4)
+                        {
+                            Form2.instance.l2.Text = trozos[4];
+                            Form2.instance.l2.ForeColor = Color.Green;
+                        }
+                        if (trozos.Length > 5)
+                        {
+                            Form2.instance.l4.Text = trozos[5];
+                            Form2.instance.l4.ForeColor = Color.Green;
+                        }
+                        break;
                 }
             }
         }
@@ -387,7 +412,12 @@ namespace Cliente
                 MessageBox.Show("Solo se puede invitar un maximo de 4 jugadores");
             }
         }
-
+        public void EMPEZAR()     //avisa al servidor de que inicie la partida
+        {
+            string peticion = "11-";
+            byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
+            server.Send(enviar);
+        }
         private void Invitar_Click(object sender, EventArgs e)
         {
             anfitrion = true;
@@ -402,6 +432,60 @@ namespace Cliente
             string peticion = "8-" + partida + "-" + USER.Text + ": " + Form2.instance.tB.Text;
             byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
             server.Send(enviar);
+        }
+
+        private void QUERY1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (NAME.Text != "" && DATE.Text != "")
+                {
+                    string QUERY1 = "1" + "-" + DATE.Text;
+                    byte[] mensaje = System.Text.Encoding.ASCII.GetBytes(QUERY1);
+                    server.Send(mensaje);
+                }
+            }
+            catch (SocketException)
+            {
+                MessageBox.Show("NO HA SIDO POSIBLE CONECTARSE AL SERVIDOR");
+                return;
+            }
+        }
+
+        private void QUERY2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (NAME.Text != "" && DATE.Text != "")
+                {
+                    string QUERY2 = "2" + "-" + DATE.Text;
+                    byte[] mensaje = System.Text.Encoding.ASCII.GetBytes(QUERY2);
+                    server.Send(mensaje);
+                }
+            }
+            catch (SocketException)
+            {
+                MessageBox.Show("NO HA SIDO POSIBLE CONECTARSE AL SERVIDOR");
+                return;
+            }
+        }
+
+        private void QUERY3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (NAME.Text != "" && DATE.Text != "")
+                {
+                    string QUERY3 = "3" + "-" + NAME.Text + "-" + DATE.Text;//probar con 03/10/2022
+                    byte[] mensaje = System.Text.Encoding.ASCII.GetBytes(QUERY3);
+                    server.Send(mensaje);
+                }
+            }
+            catch (SocketException)
+            {
+                MessageBox.Show("NO HA SIDO POSIBLE CONECTARSE AL SERVIDOR");
+                return;
+            }
         }
     }
 }

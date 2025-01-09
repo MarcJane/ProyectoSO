@@ -65,4 +65,5 @@ namespace Cliente
             CERRAR.Hide();
             ENVIAR.Hide();
         }
+    }
 }

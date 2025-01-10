@@ -39,18 +39,18 @@ namespace Cliente
 
         }
 
-        private void ENVIAR_Click(object sender, EventArgs e)
+        private void ENVIAR_Click(object sender, EventArgs e) //Envia mensaje del texbox al Chat
         {
             Form1.instance.enviarMensaje();
             textBox1.Clear();
         }
 
-        private void EMPEZAR_Click(object sender, EventArgs e)
+        private void EMPEZAR_Click(object sender, EventArgs e) //Empieza el juego
         {
             Form1.instance.EMPEZAR();
         }
 
-        private void CERRAR_Click(object sender, EventArgs e)
+        private void CERRAR_Click(object sender, EventArgs e) //Cierra el juego
         {
             this.Close();
         }

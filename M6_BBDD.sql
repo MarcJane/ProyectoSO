@@ -42,6 +42,3 @@ INSERT INTO historial VALUES (4,3,'si',16,2,'27/12/2024');
 INSERT INTO historial VALUES (4,4,'no',9,2,'27/12/2024');
 INSERT INTO historial VALUES (5,3,'si',16,2,'27/12/2024');
 INSERT INTO historial VALUES (5,2,'no',9,2,'27/12/2024');
-INSERT INTO historial VALUES (6,3,'no',9,2,'27/12/2024');
-INSERT INTO historial VALUES (6,1,'si',16,2,'27/12/2024');
-

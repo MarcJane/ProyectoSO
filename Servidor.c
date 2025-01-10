@@ -11,7 +11,7 @@
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 typedef struct {
-	char nombre[20];
+	char nombre[25];
 	int socket;
 } Conectado;
 
@@ -170,7 +170,7 @@ void *atenderCliente (void *socket)
 		}
 		else if(codigo == 3)
 		{
-			char pPeticion[20];
+			char pPeticion[25];
 			pthread_mutex_lock(&mutex);
 			p = strtok(NULL, "-");
 			strcpy(pPeticion, p);
@@ -311,7 +311,7 @@ void *atenderCliente (void *socket)
 void quitarJugador (int jugador, int nPartida, lPartidas *listaPartidas)
 {
 	int n = 0;
-	while (strcmp(jugador, listaPartidas->partida[nPartida].jugador[n]) != 0)
+	while (strcmp(int jugador, listaPartidas->partida[nPartida].jugador[n]) != 0)
 	{
 		n++;
 	}

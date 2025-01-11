@@ -486,7 +486,7 @@ namespace Cliente
             {
                 if (NAME.Text != "" && DATE.Text != "")
                 {
-                    string QUERY3 = "3" + "-" + NAME.Text + "-" + DATE.Text;//probar con 03/10/2022
+                    string QUERY3 = "3" + "-" + NAME.Text + "-" + DATE.Text;//probar con 07/01/25
                     byte[] mensaje = System.Text.Encoding.ASCII.GetBytes(QUERY3);
                     server.Send(mensaje);
                 }

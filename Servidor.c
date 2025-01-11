@@ -308,10 +308,10 @@ void *atenderCliente (void *socket)
 }
 //----------------------------------------------------------------------------------------
 
-void quitarJugador (char jugador, int nPartida, lPartidas *listaPartidas)
+void quitarJugador ( jugador, int nPartida, lPartidas *listaPartidas)
 {
 	int n = 0;
-	while (strcmp(char jugador, listaPartidas->partida[nPartida].jugador[n]) != 0)
+	while (strcmp( jugador, listaPartidas->partida[nPartida].jugador[n]) != 0)
 	{
 		n++;
 	}

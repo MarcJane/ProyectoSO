@@ -518,14 +518,14 @@ void jugadorPartidaMasLarga(char fecha[11], char respuesta[512])
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "M6_BBDD", 0, NULL, 0);
+	conn = mysql_real_connect (conn, "localhost","root", "mysql",NULL, 0, NULL, 0);
 	if (conn==NULL)
 	{
 		printf ("Error al inicializar la conexion: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	err=mysql_query(conn, "use juego;");
+	err=mysql_query(conn, "use M6_BBDDJuego;");
 	if (err!=0)
 	{
 		printf ("Error al acceder a la base de datos %u %s\n", 
@@ -586,14 +586,14 @@ void jugadorMasPartidas(char fecha[11], char respuesta[512])
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "M6_BBDD", 0, NULL, 0);
+	conn = mysql_real_connect (conn, "localhost","root", "mysql", NULL, 0, NULL, 0);
 	if (conn==NULL)
 	{
 		printf ("Error al inicializar la conexion: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	err=mysql_query(conn, "use juego;");
+	err=mysql_query(conn, "use M6_BBDDJuego;");
 	if (err!=0)
 	{
 		printf ("Error al acceder a la base de datos %u %s\n", 
@@ -645,14 +645,14 @@ void winratio(char nombre[25], char fecha[11], char respuesta[512])
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "M6_BBDD", 0, NULL, 0);
+	conn = mysql_real_connect (conn, "localhost","root", "mysql", NULL, 0, NULL, 0);
 	if (conn==NULL)
 	{
 		printf ("Error al inicializar la conexion: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	err=mysql_query(conn, "use juego;");
+	err=mysql_query(conn, "use M6_BBDDJuego;");
 	if (err!=0)
 	{
 		printf ("Error al acceder a la base de datos %u %s\n", 
@@ -710,10 +710,12 @@ void winratio(char nombre[25], char fecha[11], char respuesta[512])
 
 void registrar(char nombre[25], char contrasena[25], char respuesta[512])
 {
+	
 	MYSQL *conn;
 	int err;
-	MYSQL_RES *resultado;
+	MYSQL_RES* resultado;
 	MYSQL_ROW row;
+	
 	
 	char consulta[500];
 	int registro;
@@ -726,14 +728,14 @@ void registrar(char nombre[25], char contrasena[25], char respuesta[512])
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "M6_BBDD", 0, NULL, 0);
-	if (conn==NULL)
+	conn = mysql_real_connect(conn, "localhost", "root", "mysql", "M6_BBDDJuego", 0, NULL, 0);
+	if (conn == NULL)
 	{
-		printf ("Error al inicializar la conexion: %u %s\n", 
-				mysql_errno(conn), mysql_error(conn));
-		exit (1);
+		printf("Error al inicializar la conexion: %u %s\n",
+			   mysql_errno(conn), mysql_error(conn));
+		exit(1);
 	}
-	err=mysql_query(conn, "use juego;");
+	err=mysql_query(conn, "use M6_BBDDJuego;");
 	if (err!=0)
 	{
 		printf ("Error al acceder a la base de datos %u %s\n", 

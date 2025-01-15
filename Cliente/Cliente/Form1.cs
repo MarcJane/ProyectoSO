@@ -44,9 +44,13 @@ namespace Cliente
             {
                 int i;
                 byte[] msg2 = new byte[80];
+
                 server.Receive(msg2);
                 string mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
+                MessageBox.Show(mensaje);
+
                 string[] trozos = Encoding.ASCII.GetString(msg2).Split('-');
+                MessageBox.Show(trozos[0]);
                 int codigo = Convert.ToInt32(trozos[0]);
                 switch (codigo)
                 {

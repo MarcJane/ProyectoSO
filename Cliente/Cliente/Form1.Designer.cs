@@ -181,7 +181,7 @@ namespace Cliente
             this.QUERY1.Name = "QUERY1";
             this.QUERY1.Size = new System.Drawing.Size(368, 46);
             this.QUERY1.TabIndex = 13;
-            this.QUERY1.Text = "QUERY1";
+            this.QUERY1.Text = "Jugador con la Partida Mas Larga";
             this.QUERY1.UseVisualStyleBackColor = true;
             this.QUERY1.Click += new System.EventHandler(this.QUERY1_Click);
             // 
@@ -191,7 +191,7 @@ namespace Cliente
             this.QUERY2.Name = "QUERY2";
             this.QUERY2.Size = new System.Drawing.Size(368, 47);
             this.QUERY2.TabIndex = 14;
-            this.QUERY2.Text = "QUERY2";
+            this.QUERY2.Text = "Jugador con Mas Partidas";
             this.QUERY2.UseVisualStyleBackColor = true;
             this.QUERY2.Click += new System.EventHandler(this.QUERY2_Click);
             // 
@@ -201,7 +201,7 @@ namespace Cliente
             this.QUERY3.Name = "QUERY3";
             this.QUERY3.Size = new System.Drawing.Size(368, 46);
             this.QUERY3.TabIndex = 15;
-            this.QUERY3.Text = "QUERY3";
+            this.QUERY3.Text = "Winratio";
             this.QUERY3.UseVisualStyleBackColor = true;
             this.QUERY3.Click += new System.EventHandler(this.QUERY3_Click);
             // 

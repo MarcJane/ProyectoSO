@@ -279,7 +279,7 @@ namespace Cliente
         private void LOGIN_Click(object sender, EventArgs e) //Boton para iniciar sesion
         {
             IPAddress direc = IPAddress.Parse("192.168.56.101");
-            IPEndPoint ipep = new IPEndPoint(direc, 5060);
+            IPEndPoint ipep = new IPEndPoint(direc, 50025);
 
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
@@ -306,7 +306,7 @@ namespace Cliente
         private void SIGNIN_Click(object sender, EventArgs e) //Boton para registrarse
         {
             IPAddress direc = IPAddress.Parse("192.168.56.101");
-            IPEndPoint ipep = new IPEndPoint(direc, 5060);
+            IPEndPoint ipep = new IPEndPoint(direc, 50025);
 
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try

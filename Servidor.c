@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 	pthread_t thread;
 	lista.num = 0;
 	int conexion = 0;
-	int puerto = 5060;
+	int puerto = 50025;
 	inicializarPartidas(&listaPartidas);
 	
 	if ((sock_listen = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -335,7 +335,7 @@ void inicializarPartidas (lPartidas *listaPartidas) //Funcion que inicia la part
 
 //----------------------------------------------------------------------------------------
 
-int tPartida (char invitados[60], int numJ, lPartidas *listaPartidas, lConectados *lista)
+int tPartida (char invitados[60], int numJ, lPartidas *listaPartidas, lConectados *lista) 
 {
 	int n = 0;
 	int j = 0;
@@ -393,14 +393,14 @@ void acceso(char nombre[25], char contrasena[25], char respuesta[512]) //Funcion
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "M6_BBDD", 0, NULL, 0);
+	conn = mysql_real_connect (conn, "shiva2.upc.es","root", "mysql", "M6_BBDDJuego", 0, NULL, 0);
 	if (conn==NULL)
 	{
 		printf ("Error al inicializar la conexion: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	err=mysql_query(conn, "use juego;");
+	err=mysql_query(conn, "use M6_BBDDJuego;");
 	if (err!=0)
 	{
 		printf ("Error al acceder a la base de datos %u %s\n", 
@@ -448,7 +448,7 @@ void dameConectados(lConectados *lista, char conectados [300]) //Funcion que te 
 
 //----------------------------------------------------------------------------------------
 
-int damePos (lConectados * lista, char nombre[20])
+int damePos (lConectados * lista, char nombre[20]) //Funcion que te dice si el jugador esta conectado o no
 {
 	int n = 0;
 	int encontrado = 0;

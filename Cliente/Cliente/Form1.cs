@@ -276,7 +276,7 @@ namespace Cliente
                 }
             }
         }
-        private void LOGIN_Click(object sender, EventArgs e)
+        private void LOGIN_Click(object sender, EventArgs e) //Boton para iniciar sesion
         {
             IPAddress direc = IPAddress.Parse("192.168.56.101");
             IPEndPoint ipep = new IPEndPoint(direc, 5060);
@@ -303,7 +303,7 @@ namespace Cliente
             }
         }
 
-        private void SIGNIN_Click(object sender, EventArgs e)
+        private void SIGNIN_Click(object sender, EventArgs e) //Boton para registrarse
         {
             IPAddress direc = IPAddress.Parse("192.168.56.101");
             IPEndPoint ipep = new IPEndPoint(direc, 5060);
@@ -329,7 +329,7 @@ namespace Cliente
             }
         }
 
-        private void DISCONECT_Click(object sender, EventArgs e)
+        private void DISCONECT_Click(object sender, EventArgs e) //Boton para desconectar
         {
             try
             {
@@ -373,7 +373,7 @@ namespace Cliente
                 return;
             }
         }
-        private List<String> dameListaConectados(string lista, int nConectados)
+        private List<String> dameListaConectados(string lista, int nConectados) //Lista a los conectados
         {
             List<String> conectados = new List<String>();
             string[] lconectados = lista.Split('-');
@@ -403,7 +403,7 @@ namespace Cliente
             byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
             server.Send(enviar);
         }
-        private void Invitar_Click(object sender, EventArgs e)
+        private void Invitar_Click(object sender, EventArgs e) //Boton que te permite invitar a otros jugadores a la partida
         {
             anfitrion = true;
             string invite = "6-" + nInvitados + invitados;
@@ -412,7 +412,7 @@ namespace Cliente
             server.Send(mensaje);
             form.Show();
         }
-        public void enviarMensaje()
+        public void enviarMensaje() //Chat
         {
             string peticion = "8-" + partida + "-" + USER.Text + ": " + Form2.instance.tB.Text;
             byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
@@ -448,7 +448,7 @@ namespace Cliente
                     break;
             }
         }
-        private void QUERY1_Click(object sender, EventArgs e)
+        private void QUERY1_Click(object sender, EventArgs e) //Boton que te dice jugador con la partida mas larga
         {
             try
             {
@@ -466,7 +466,7 @@ namespace Cliente
             }
         }
 
-        private void QUERY2_Click(object sender, EventArgs e)
+        private void QUERY2_Click(object sender, EventArgs e) //Boton que te dice jugador con mas partidas
         {
             try
             {
@@ -484,7 +484,7 @@ namespace Cliente
             }
         }
 
-        private void QUERY3_Click(object sender, EventArgs e)
+        private void QUERY3_Click(object sender, EventArgs e) //Boton que te dice el winratio del jugador
         {
             try
             {

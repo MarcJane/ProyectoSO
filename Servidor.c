@@ -308,7 +308,7 @@ void *atenderCliente (void *socket)
 }
 //----------------------------------------------------------------------------------------
 
-void quitarJugador (int jugador,int nPartida, lPartidas *listaPartidas)
+void quitarJugador (int jugador,int nPartida, lPartidas *listaPartidas) //Funcion que elimina a un jugados de la partida
 {
 	int n = 0;
 	while (strcmp( jugador, listaPartidas->partida[nPartida].jugador[n]) != 0)
@@ -324,7 +324,7 @@ void quitarJugador (int jugador,int nPartida, lPartidas *listaPartidas)
 
 //----------------------------------------------------------------------------------------
 
-void inicializarPartidas (lPartidas *listaPartidas)
+void inicializarPartidas (lPartidas *listaPartidas) //Funcion que inicia la partida
 {
 	int n;
 	for (n = 0; n < 99; n++)
@@ -377,7 +377,7 @@ int tPartida (char invitados[60], int numJ, lPartidas *listaPartidas, lConectado
 
 //----------------------------------------------------------------------------------------
 
-void acceso(char nombre[25], char contrasena[25], char respuesta[512])
+void acceso(char nombre[25], char contrasena[25], char respuesta[512]) //Funcion para iniciar sesion
 {
 	MYSQL *conn;
 	int err;
@@ -436,7 +436,7 @@ void acceso(char nombre[25], char contrasena[25], char respuesta[512])
 }
 
 //--------------------------------------------------------------------------------------------------
-void dameConectados(lConectados *lista, char conectados [300])
+void dameConectados(lConectados *lista, char conectados [300]) //Funcion que te dice los jugadores invitados
 {
 	int n;
 	sprintf (conectados, "%d", lista->num);
@@ -467,7 +467,7 @@ int damePos (lConectados * lista, char nombre[20])
 
 //----------------------------------------------------------------------------------------
 
-int desconectar (lConectados *lista, char nombre[20])
+int desconectar (lConectados *lista, char nombre[20]) //Funcion para desconectarse del servidor
 {
 	int pos = damePos(lista, nombre);
 	if (pos == -1)
@@ -486,7 +486,7 @@ int desconectar (lConectados *lista, char nombre[20])
 
 //----------------------------------------------------------------------------------------
 
-int conectar (lConectados *lista, char nombre[20], int socket)
+int conectar (lConectados *lista, char nombre[20], int socket) //Funcion que te conecta al servidor
 {
 	if (lista->num == 100)
 		return -1;
@@ -502,7 +502,7 @@ int conectar (lConectados *lista, char nombre[20], int socket)
 
 //----------------------------------------------------------------------------------------
 
-void jugadorPartidaMasLarga(char fecha[11], char respuesta[512])
+void jugadorPartidaMasLarga(char fecha[11], char respuesta[512]) //Funcion que te dice la partida mas larga del jugador
 {
 	MYSQL *conn;
 	int err;
@@ -518,7 +518,7 @@ void jugadorPartidaMasLarga(char fecha[11], char respuesta[512])
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "localhost","root", "mysql",NULL, 0, NULL, 0);
+	conn = mysql_real_connect (conn, "localhost","root", "mysql","M6_BBDDJuego", 0, NULL, 0);
 	if (conn==NULL)
 	{
 		printf ("Error al inicializar la conexion: %u %s\n", 
@@ -570,7 +570,7 @@ void jugadorPartidaMasLarga(char fecha[11], char respuesta[512])
 //------------------------------------------------------------------------------------------------
 
 
-void jugadorMasPartidas(char fecha[11], char respuesta[512])
+void jugadorMasPartidas(char fecha[11], char respuesta[512]) //Funcion que dice el jugador con mas partidas
 {
 	MYSQL *conn;
 	int err;
@@ -586,7 +586,7 @@ void jugadorMasPartidas(char fecha[11], char respuesta[512])
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", NULL, 0, NULL, 0);
+	conn = mysql_real_connect (conn, "localhost","root", "mysql", "M6_BBDDJuego", 0, NULL, 0);
 	if (conn==NULL)
 	{
 		printf ("Error al inicializar la conexion: %u %s\n", 
@@ -628,7 +628,7 @@ void jugadorMasPartidas(char fecha[11], char respuesta[512])
 //------------------------------------------------------------------------------------------------
 
 
-void winratio(char nombre[25], char fecha[11], char respuesta[512])
+void winratio(char nombre[25], char fecha[11], char respuesta[512]) //Funcion que te dice el porcentaje de victorias/derrotas del jugador
 {
 	MYSQL *conn;
 	int err;
@@ -645,7 +645,7 @@ void winratio(char nombre[25], char fecha[11], char respuesta[512])
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", NULL, 0, NULL, 0);
+	conn = mysql_real_connect (conn, "localhost","root", "mysql", "M6_BBDDJuego", 0, NULL, 0);
 	if (conn==NULL)
 	{
 		printf ("Error al inicializar la conexion: %u %s\n", 
@@ -708,7 +708,7 @@ void winratio(char nombre[25], char fecha[11], char respuesta[512])
 
 //--------------------------------------------------------------------------------------------
 
-void registrar(char nombre[25], char contrasena[25], char respuesta[512])
+void registrar(char nombre[25], char contrasena[25], char respuesta[512]) //Funcion que te registra en el juego
 {
 	
 	MYSQL *conn;

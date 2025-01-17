@@ -507,24 +507,42 @@ namespace Cliente
             label9.Visible = false;
             invitados = null;
         }
-        private void textoChat_KeyPress(object sender, KeyPressEventArgs e)
+        //private void textoChat_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    if (e.KeyChar == (char)Keys.Enter)
+        //    {
+        //        string texto = textoChat.Text;
+        //        string chatNombre = nombreChat.Text;
+        //        if (texto != "")
+        //        {
+        //            string mensajeChat = texto;
+
+        //            string name = chatNombre;
+
+        //            textoChat.Text = "";
+        //            nombreChat.Text = "";
+        //            string mensaje = "9/" + mensajeChat + "/" + name;
+        //            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+        //            server.Send(msg);
+        //        }
+        //    }
+        //}
+
+        private void EnvMSG_Click(object sender, EventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
+            string texto = textoChat.Text;
+            string chatNombre = nombreChat.Text;
+            if (texto != "")
             {
-                string texto = textoChat.Text;
-                string chatNombre = nombreChat.Text;
-                if (texto != "")
-                {
-                    string mensajeChat = texto;
+                string mensajeChat = texto;
 
-                    string name = chatNombre;
+                string name = chatNombre;
 
-                    textoChat.Text = "";
-                    nombreChat.Text = "";
-                    string mensaje = "9/" + mensajeChat + "/" + name;
-                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-                    server.Send(msg);
-                }
+                textoChat.Text = "";
+                nombreChat.Text = "";
+                string mensaje = "9-" + mensajeChat + "-" + name;
+                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+                server.Send(msg);
             }
         }
     }

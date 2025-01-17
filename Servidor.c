@@ -291,16 +291,16 @@ void *atenderCliente (void *socket)
 		}
 		else if(codigo == 9)
 		{
-		char mensaje[200];
+		char mensaje[200]; //envia mensaje al chat
 		p = strtok(NULL, "/");
 		if (p != NULL) {
 			strcpy(mensaje, p);
 			sprintf(respuesta, "9/%s", mensaje);
 			printf("Mensaje: %s\n", respuesta);
 			int j;
-			for (j = 0; j < miLista.num; j++)
+			for (j = 0; j < lista.num; j++)
 			{
-				write(miLista.conectados[j].socket, respuesta, strlen(respuesta));
+				write(lista.conectados[j].socket, respuesta, strlen(respuesta));
 			}
 		}
 		}

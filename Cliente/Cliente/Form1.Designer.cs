@@ -55,6 +55,7 @@ namespace Cliente
             this.nombreChat = new System.Windows.Forms.TextBox();
             this.textoChat = new System.Windows.Forms.TextBox();
             this.labelChat = new System.Windows.Forms.Label();
+            this.EnvMSG = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -168,7 +169,7 @@ namespace Cliente
             this.lConectados});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1089, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1089, 28);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -287,11 +288,22 @@ namespace Cliente
             this.labelChat.TabIndex = 24;
             this.labelChat.Text = "labelChat";
             // 
+            // EnvMSG
+            // 
+            this.EnvMSG.Location = new System.Drawing.Point(901, 225);
+            this.EnvMSG.Name = "EnvMSG";
+            this.EnvMSG.Size = new System.Drawing.Size(75, 62);
+            this.EnvMSG.TabIndex = 25;
+            this.EnvMSG.Text = "Enviar Mensaje";
+            this.EnvMSG.UseVisualStyleBackColor = true;
+            this.EnvMSG.Click += new System.EventHandler(this.EnvMSG_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1089, 536);
+            this.Controls.Add(this.EnvMSG);
             this.Controls.Add(this.labelChat);
             this.Controls.Add(this.textoChat);
             this.Controls.Add(this.nombreChat);
@@ -356,6 +368,7 @@ namespace Cliente
         private System.Windows.Forms.TextBox nombreChat;
         private System.Windows.Forms.TextBox textoChat;
         private System.Windows.Forms.Label labelChat;
+        private System.Windows.Forms.Button EnvMSG;
     }
 }
 

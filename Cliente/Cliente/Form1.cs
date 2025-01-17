@@ -22,8 +22,8 @@ namespace Cliente
         public static Form1 instance;
         Form2 form = new Form2();
         public int J;
-        bool anfitrion;
         int partida;
+        bool atendiendo = false;
         public Form1()
         {
             InitializeComponent();
@@ -35,27 +35,32 @@ namespace Cliente
         {
 
         }
-        private void atenderServidor()
+        private void atenderServidor() //atiende las respuestas del servidor
         {
-            int nAceptada = 0;
             string[] jugadores = new string[3];
-
             while (true)
             {
                 int i;
                 byte[] msg2 = new byte[80];
-
                 server.Receive(msg2);
-                string mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                MessageBox.Show(mensaje);
-
-                string[] trozos = Encoding.ASCII.GetString(msg2).Split('-');
-                MessageBox.Show(trozos[0]);
-                int codigo = Convert.ToInt32(trozos[0]);
-                switch (codigo)
+                string mensaje;
+                string[] trozos;
+                int codigo = 11;
+                try
+                {
+                    mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
+                    trozos = Encoding.ASCII.GetString(msg2).Split('-');
+                    codigo = Convert.ToInt32(trozos[0]);
+                }
+                catch
+                {
+                    mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
+                    trozos = Encoding.ASCII.GetString(msg2).Split('-');
+                }
+                switch (codigo) //dependiendo del codigo hace la accion pedida por el servidor
                 {
                     case 0:
-                        if (mensaje == "0-0")
+                        if (mensaje == "0-0") //el usuario se conecta y seha logeado de forma correcta o le informa de que ha introduciodo mal el nombre o la contraseña
                         {
                             Invoke(new Action(() =>
                             {
@@ -66,15 +71,16 @@ namespace Cliente
                                 label5.Visible = true;
                                 NAME.Visible = true;
                                 DATE.Visible = true;
-                                QUERY1.Visible = false;
-                                QUERY2.Visible = false;
-                                QUERY3.Visible = false;
+                                QUERY1.Visible = true;
+                                QUERY2.Visible = true;
+                                QUERY3.Visible = true;
+                                menuStrip1.Visible = true;
                                 lConectados.Visible = true;
                                 INVITAR.Visible = true;
                                 CANCELAR.Visible = true;
                                 USER.Enabled = false;
                                 PASSWORD.Enabled = false;
-                                SIGNIN.Enabled = true;
+                                SIGNIN.Enabled = false;
                                 LOGIN.Enabled = false;
                             }));
                         }
@@ -84,7 +90,7 @@ namespace Cliente
                         }
                         break;
                     case 1:
-                        if (mensaje != "1-Error")
+                        if (mensaje != "1-Error") //respuesta del servidor del jugador con la partida mas larga
                         {
                             i = 1;
                             string jugadoresP = "Los jugadores que jugaron la partida mas larga son : " + mensaje.Split('-')[i];
@@ -103,7 +109,7 @@ namespace Cliente
                         break;
                     case 2:
 
-                        if (mensaje != "2-Error")
+                        if (mensaje != "2-Error") //respuesta del servidor del jugador con mas partidas
                         {
                             string mensaje2 = mensaje.Split('-')[1];
                             MessageBox.Show("El jugador " + mensaje2 + " fue el jugador con mas partidas el dia " + DATE.Text);
@@ -114,7 +120,7 @@ namespace Cliente
                         }
                         break;
                     case 3:
-                        if (mensaje != "3-Error")
+                        if (mensaje != "3-Error") //respuesta del servidor de cual es el winratio del jugador
                         {
                             double Wins = Convert.ToDouble(mensaje.Split('-')[1]);
                             double Played = Convert.ToDouble(mensaje.Split('-')[2]);
@@ -128,19 +134,19 @@ namespace Cliente
                         }
                         break;
                     case 4:
-                        if (mensaje == "4-0")
+                        if (mensaje == "4-0") //informa si el cliente se ha registrado correctamente y le permite el acceso
                         {
                             Invoke(new Action(() =>
                             {
                                 MessageBox.Show("Registrado correctamente, has accedido a la cuenta");
                                 this.BackColor = Color.Green;
-                                lConectados.BackColor = Color.Green;
                                 menuStrip1.BackColor = Color.Green;
                                 label3.Visible = true;
                                 label4.Visible = true;
                                 label5.Visible = true;
                                 NAME.Visible = true;
                                 DATE.Visible = true;
+                                menuStrip1.Visible = true;
                                 QUERY1.Visible = false;
                                 QUERY2.Visible = false;
                                 QUERY3.Visible = false;
@@ -161,7 +167,7 @@ namespace Cliente
                     case 5:
                         break;
                     case 6:
-                        int id = 0;
+                        int id = 0;  //añade a la lista de jugadores conectados el listado que le entrega el servidor
                         int nConectados = Convert.ToInt32(trozos[1]);
                         lConectados.DropDownItems.Clear();
                         foreach (String items in dameListaConectados(mensaje, nConectados))
@@ -174,7 +180,7 @@ namespace Cliente
                         }
                         break;
                     case 7:
-                        if (mensaje != "7-ERROR")
+                        if (mensaje != "7-ERROR")  //avisa al cliente de que ha sido invitado a jugar y le da la opcion de aceptar o rechazar
                         {
                             string peticion;
                             Convert.ToString(mensaje);
@@ -199,55 +205,6 @@ namespace Cliente
                         }
                         break;
                     case 8:
-                        partida = Convert.ToInt32(trozos[1]);
-                        if (trozos[2] == "Yes")
-                        {
-                            i = 0;
-                            string peticion;
-                            jugadores[nAceptada] = trozos[3];
-                            switch (nAceptada)
-                            {
-                                case 0:
-                                    Form2.instance.l1.Text = jugadores[nAceptada];
-                                    Form2.instance.l1.ForeColor = Color.Green;
-                                    nAceptada++;
-                                    break;
-                                case 1:
-                                    Form2.instance.l2.Text = jugadores[nAceptada];
-                                    Form2.instance.l2.ForeColor = Color.Green;
-                                    nAceptada++;
-                                    break;
-                                case 2:
-                                    Form2.instance.l3.Text = jugadores[nAceptada];
-                                    Form2.instance.l3.ForeColor = Color.Green;
-                                    break;
-                            }
-                            string peticion2 = "-" + USER.Text;
-                            while (jugadores[i] != null)
-                            {
-                                peticion2 = peticion2 + "-" + jugadores[i];
-                                i++;
-                            }
-                            peticion = "9-" + i;
-                            peticion = peticion + peticion2;
-                            byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
-                            server.Send(enviar);
-                        }
-                        break;
-                    case 9:
-                        Form2.instance.l3.Text = Form2.instance.l2.Text;
-                        Form2.instance.l2.Text = Form2.instance.l1.Text;
-                        Form2.instance.l1.Text = Form2.instance.l8.Text;
-                        Form2.instance.l8.Text = trozos[1];
-                        break;
-                    case 10:
-                        Invoke(new Action(() =>
-                        {
-                            Form2.instance.startAction();       //inicia la partida
-                        }));
-                        //Recivir una peticion que te permita aceptar o denegar partida y envie una peticion 7-Aceptada o 7-Rechazada
-                        break;
-                    case 11:
                         J = Convert.ToInt32(trozos[1]);     //cuando la gente se va uniendo a la partida va añadiendo su nombre a los jugadores y los pone en verde
                         Invoke(new Action(() =>
                         {
@@ -271,12 +228,25 @@ namespace Cliente
                             Form2.instance.l4.ForeColor = Color.Green;
                         }
                         break;
-                    case 12:
+                    case 9:
+                        Form2.instance.l3.Text = Form2.instance.l2.Text; //actualiza los mensajes enviados
+                        Form2.instance.l2.Text = Form2.instance.l1.Text;
+                        Form2.instance.l1.Text = Form2.instance.l8.Text;
+                        Form2.instance.l8.Text = trozos[1];
+                        break;
+                    case 10:
+                        Invoke(new Action(() =>
+                        {
+                            Form2.instance.startAction();       //inicia la partida
+                        }));
+                        //Recivir una peticion que te permita aceptar o denegar partida y envie una peticion 7-Aceptada o 7-Rechazada
+                        break;
+                    case 11:
                         break;
                 }
             }
         }
-        private void LOGIN_Click(object sender, EventArgs e) //Boton para iniciar sesion
+        private void LOGIN_Click(object sender, EventArgs e) //envia la peticion de login con la informacion necesaria
         {
             IPAddress direc = IPAddress.Parse("192.168.56.101");
             IPEndPoint ipep = new IPEndPoint(direc, 50025);
@@ -287,14 +257,23 @@ namespace Cliente
                 server.Connect(ipep);
 
 
-                string login = "0" + "-" + USER.Text + "-" + PASSWORD.Text;
-                byte[] mensaje = System.Text.Encoding.ASCII.GetBytes(login);
+                if (USER.Text != "" && PASSWORD.Text != "")
+                {
+                    string login = "0" + "-" + USER.Text + "-" + PASSWORD.Text;
+                    byte[] mensaje = System.Text.Encoding.ASCII.GetBytes(login);
 
-                server.Send(mensaje);
+                    server.Send(mensaje);
 
-                ThreadStart ts = delegate { atenderServidor(); };
-                atender = new Thread(ts);
-                atender.Start();
+                    if (!atendiendo)
+                    {
+                        ThreadStart ts = delegate { atenderServidor(); };
+                        atender = new Thread(ts);
+                        atender.Start();
+                        atendiendo = true;
+                    }
+                }
+                else
+                    MessageBox.Show("Introduzca su nombre y contraseña");
             }
             catch (SocketException)
             {
@@ -303,7 +282,7 @@ namespace Cliente
             }
         }
 
-        private void SIGNIN_Click(object sender, EventArgs e) //Boton para registrarse
+        private void SIGNIN_Click(object sender, EventArgs e) //envia peticion de añadir un nuevo cliente junto con la informacion necesaria
         {
             IPAddress direc = IPAddress.Parse("192.168.56.101");
             IPEndPoint ipep = new IPEndPoint(direc, 50025);
@@ -318,9 +297,14 @@ namespace Cliente
                 byte[] mensaje = System.Text.Encoding.ASCII.GetBytes(SIGNIN1);
 
                 server.Send(mensaje);
-                ThreadStart ts = delegate {atenderServidor();};
-                atender = new Thread(ts);
-                atender.Start();
+
+                if (!atendiendo)
+                {
+                    ThreadStart ts = delegate { atenderServidor(); };
+                    atender = new Thread(ts);
+                    atender.Start();
+                    atendiendo = true;
+                }
             }
             catch (SocketException)
             {
@@ -366,6 +350,7 @@ namespace Cliente
                 SIGNIN.Enabled = true;
                 LOGIN.Enabled = true;
                 server.Close();
+                atendiendo = false;
             }
             catch (SocketException)
             {
@@ -390,7 +375,7 @@ namespace Cliente
             }
             return conectados;
         }
-        public void item_Click(object sender, EventArgs e)
+        public void item_Click(object sender, EventArgs e) //añadir a usuarios para invitarlos a jugar
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem;
             MessageBox.Show("Se enviara una invitacion a " + item.Text);
@@ -399,20 +384,21 @@ namespace Cliente
 
         public void EMPEZAR()     //avisa al servidor de que inicie la partida
         {
-            string peticion = "11-";
+            string peticion = "8-";
             byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
             server.Send(enviar);
         }
         private void Invitar_Click(object sender, EventArgs e) //Boton que te permite invitar a otros jugadores a la partida
         {
-            anfitrion = true;
-            string invite = "6-" + nInvitados + invitados;
-            byte[] mensaje = System.Text.Encoding.ASCII.GetBytes(invite);
-
-            server.Send(mensaje);
-            form.Show();
+            label6.Visible = true;
+            if (invitados != null)
+            {
+                string invite = "6-" + nInvitados + invitados;
+                byte[] mensaje = System.Text.Encoding.ASCII.GetBytes(invite);
+                server.Send(mensaje);
+            }
         }
-        public void enviarMensaje() //Chat
+        public void enviarMensaje() //envia los mensajes del chat al servidor
         {
             string peticion = "8-" + partida + "-" + USER.Text + ": " + Form2.instance.tB.Text;
             byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
@@ -500,6 +486,21 @@ namespace Cliente
                 MessageBox.Show("NO HA SIDO POSIBLE CONECTARSE AL SERVIDOR");
                 return;
             }
+        }
+
+        private void CANCELAR_Click(object sender, EventArgs e) //elimina a la gente de la lista de invitacion
+        {
+            label6.Visible = false;
+            INVITAR.Enabled = false;
+            CANCELAR.Enabled = false;
+            nInvitados = 0;
+            label7.Text = "";
+            label7.Visible = false;
+            label8.Text = "";
+            label7.Visible = false;
+            label9.Text = "";
+            label9.Visible = false;
+            invitados = null;
         }
     }
 }

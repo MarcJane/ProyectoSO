@@ -223,6 +223,7 @@ namespace Cliente
             this.CANCELAR.TabIndex = 17;
             this.CANCELAR.Text = "CANCELAR";
             this.CANCELAR.UseVisualStyleBackColor = true;
+            this.CANCELAR.Click += new System.EventHandler(this.CANCELAR_Click);
             // 
             // label6
             // 

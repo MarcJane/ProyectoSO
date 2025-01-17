@@ -538,6 +538,10 @@ namespace Cliente
 
                 textoChat.Text = "";
                 nombreChat.Text = "";
+                
+                string text = ">>" + chatNombre + "-" + texto + "\n";
+                labelChat.Text = text;
+
                 string mensaje = "9/" + mensajeChat + "/" + name;
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);

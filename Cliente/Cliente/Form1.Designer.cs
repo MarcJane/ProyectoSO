@@ -52,6 +52,9 @@ namespace Cliente
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.nombreChat = new System.Windows.Forms.TextBox();
+            this.textoChat = new System.Windows.Forms.TextBox();
+            this.labelChat = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -165,7 +168,7 @@ namespace Cliente
             this.lConectados});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(976, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1089, 30);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -261,11 +264,37 @@ namespace Cliente
             this.label9.TabIndex = 21;
             this.label9.Text = "label9";
             // 
+            // nombreChat
+            // 
+            this.nombreChat.Location = new System.Drawing.Point(820, 183);
+            this.nombreChat.Name = "nombreChat";
+            this.nombreChat.Size = new System.Drawing.Size(100, 22);
+            this.nombreChat.TabIndex = 22;
+            // 
+            // textoChat
+            // 
+            this.textoChat.Location = new System.Drawing.Point(946, 183);
+            this.textoChat.Name = "textoChat";
+            this.textoChat.Size = new System.Drawing.Size(100, 22);
+            this.textoChat.TabIndex = 23;
+            // 
+            // labelChat
+            // 
+            this.labelChat.AutoSize = true;
+            this.labelChat.Location = new System.Drawing.Point(909, 105);
+            this.labelChat.Name = "labelChat";
+            this.labelChat.Size = new System.Drawing.Size(67, 17);
+            this.labelChat.TabIndex = 24;
+            this.labelChat.Text = "labelChat";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(976, 536);
+            this.ClientSize = new System.Drawing.Size(1089, 536);
+            this.Controls.Add(this.labelChat);
+            this.Controls.Add(this.textoChat);
+            this.Controls.Add(this.nombreChat);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -324,6 +353,9 @@ namespace Cliente
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox nombreChat;
+        private System.Windows.Forms.TextBox textoChat;
+        private System.Windows.Forms.Label labelChat;
     }
 }
 

@@ -291,20 +291,18 @@ void *atenderCliente (void *socket)
 		}
 		else if(codigo == 9)
 		{
-			pthread_mutex_lock(&mutex);		//envia los mensajes de chat al resto de jugadores
-			n = 0;
-			p = strtok(NULL, "-");
-			p = strtok(NULL, "-");
-			sprintf(respuesta, "9-%s", p);
-			while (n < 4)
+		char mensaje[200];
+		p = strtok(NULL, "/");
+		if (p != NULL) {
+			strcpy(mensaje, p);
+			sprintf(respuesta, "9/%s", mensaje);
+			printf("Mensaje: %s\n", respuesta);
+			int j;
+			for (j = 0; j < miLista.num; j++)
 			{
-				if (listaPartidas.partida[partida].aceptado[n] == 1)
-				{
-					write(listaPartidas.partida[partida].socket[n], respuesta, strlen(respuesta));
-				}
-				n++;
+				write(miLista.conectados[j].socket, respuesta, strlen(respuesta));
 			}
-			pthread_mutex_unlock(&mutex);
+		}
 		}
 		if (codigo == 0 || codigo == 4 || codigo == 5)
 		{
@@ -412,7 +410,7 @@ void acceso(char nombre[25], char contrasena[25], char respuesta[512]) //Funcion
 			mysql_errno(conn), mysql_error(conn));
 		exit(1);
 	}
-	conn = mysql_real_connect(conn, "localhost", "root", "mysql", NULL, 0, NULL, 0);
+	conn = mysql_real_connect(conn, "localhost", "root", "mysql", "M6_BBDDJuego", 0, NULL, 0);
 	if (conn == NULL)
 	{
 		printf("Error al inicializar la conexion: %u %s\n",
@@ -746,7 +744,7 @@ void registrar(char nombre[25], char contrasena[25], char respuesta[512]) //Func
 			mysql_errno(conn), mysql_error(conn));
 		exit(1);
 	}
-	conn = mysql_real_connect(conn, "localhost", "root", "mysql", NULL, 0, NULL, 0);
+	conn = mysql_real_connect(conn, "localhost", "root", "mysql", "M6_BBDDJuego", 0, NULL, 0);
 	if (conn == NULL)
 	{
 		printf("Error al inicializar la conexion: %u %s\n",
@@ -782,5 +780,5 @@ void registrar(char nombre[25], char contrasena[25], char respuesta[512]) //Func
 	}
 
 }
-}
+
 

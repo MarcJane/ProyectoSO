@@ -229,10 +229,15 @@ namespace Cliente
                         }
                         break;
                     case 9:
-                        Form2.instance.l3.Text = Form2.instance.l2.Text; //actualiza los mensajes enviados
-                        Form2.instance.l2.Text = Form2.instance.l1.Text;
-                        Form2.instance.l1.Text = Form2.instance.l8.Text;
-                        Form2.instance.l8.Text = trozos[1];
+                        mensaje = trozos[1].Split('\0')[0];
+
+                        string usuario = trozos[2];
+                        string texto = ">>" + usuario + "-" + mensaje + "\n";
+                        labelChat.Text = texto;
+                        //Form2.instance.l3.Text = Form2.instance.l2.Text; //actualiza los mensajes enviados
+                        //Form2.instance.l2.Text = Form2.instance.l1.Text;
+                        //Form2.instance.l1.Text = Form2.instance.l8.Text;
+                        //Form2.instance.l8.Text = trozos[1];
                         break;
                     case 10:
                         Invoke(new Action(() =>
@@ -501,6 +506,26 @@ namespace Cliente
             label9.Text = "";
             label9.Visible = false;
             invitados = null;
+        }
+        private void textoChat_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                string texto = textoChat.Text;
+                string chatNombre = nombreChat.Text;
+                if (texto != "")
+                {
+                    string mensajeChat = texto;
+
+                    string name = chatNombre;
+
+                    textoChat.Text = "";
+                    nombreChat.Text = "";
+                    string mensaje = "9/" + mensajeChat + "/" + name;
+                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+                    server.Send(msg);
+                }
+            }
         }
     }
 }

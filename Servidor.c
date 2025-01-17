@@ -23,6 +23,7 @@ typedef struct {
 typedef struct {
 	char jugador[4][20];
 	int socket[4];
+	int aceptado[4];
 	int ocupado;
 } Partida;
 
@@ -54,6 +55,7 @@ void *atenderCliente(void *socket);
 
 int main(int argc, char *argv[]) 
 {
+	//Parte inicial del codigo, inicializa el servidor y crea los threads para los clientes
 	int sock_conn, sock_listen;
 	struct sockaddr_in serv_adr;
 	pthread_t thread;
@@ -116,23 +118,23 @@ void *atenderCliente (void *socket)
 	int n = 0;
 	int z;
 	
+	//parte del servidor que lleva cada cliente, recibe la peticion del cliente y depende de la peticion realiza una accion u otra hasta que se desconecta
+
 	while(conexion == 0)
 	{
-		ret=read(sock_conn,peticion, sizeof(peticion));
-		printf ("Recibido\n");
-		peticion[ret]='\0';
-		
-		int error = 1;
-		int codigo = 9999;
-		char *p;
-		
-		printf ("Peticion: %s\n",peticion);
+		ret = read(sock_conn, peticion, sizeof(peticion));
+		printf("Recibido\n");
+		peticion[ret] = '\0';
+		int codigo;
+		char* p;
+
+		printf("Peticion: %s\n", peticion);
 		p = strtok(peticion, "-");
 		codigo = atoi(p);
 		
 		if(codigo == 0)
 		{
-			pthread_mutex_lock(&mutex);
+			pthread_mutex_lock(&mutex); //al conectarse el usuario con su nombre o contraseña esta parte se asegura de que sean correctas y le concede el acceso
 			p = strtok(NULL, "-");
 			strcpy(nombre, p);
 			printf("Codigo de conexion: %d\n", r);
@@ -148,7 +150,7 @@ void *atenderCliente (void *socket)
 		}
 		else if(codigo == 1)
 		{
-			pthread_mutex_lock(&mutex);
+			pthread_mutex_lock(&mutex); //esta es una de las peticiones que puede hacer el cliente para saber que jugador ha jugado la partida mas larga
 			p = strtok(NULL, "-");
 			strcpy(fecha, p);
 			printf("Codigo: %d, Fecha: %s\n", codigo, fecha);
@@ -159,7 +161,7 @@ void *atenderCliente (void *socket)
 		}
 		else if(codigo == 2)
 		{
-			pthread_mutex_lock(&mutex);
+			pthread_mutex_lock(&mutex); //otra peticion, esta para el jugador con mas partidas
 			p = strtok(NULL, "-");
 			strcpy(fecha, p);		
 			printf("Codigo: %d, Fecha: %s\n", codigo, fecha);
@@ -170,7 +172,7 @@ void *atenderCliente (void *socket)
 		}
 		else if(codigo == 3)
 		{
-			char pPeticion[25];
+			char pPeticion[25]; //peticion para jugador con el mayor winratio
 			pthread_mutex_lock(&mutex);
 			p = strtok(NULL, "-");
 			strcpy(pPeticion, p);

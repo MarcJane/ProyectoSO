@@ -46,6 +46,7 @@ namespace Cliente
                 string mensaje;
                 string[] trozos;
                 int codigo = 11;
+                
                 try
                 {
                     mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
@@ -57,6 +58,7 @@ namespace Cliente
                     mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
                     trozos = Encoding.ASCII.GetString(msg2).Split('-');
                 }
+                MessageBox.Show(mensaje);
                 switch (codigo) //dependiendo del codigo hace la accion pedida por el servidor
                 {
                     case 0:
@@ -234,10 +236,6 @@ namespace Cliente
                         string usuario = trozos[2];
                         string texto = ">>" + usuario + "-" + mensaje + "\n";
                         labelChat.Text = texto;
-                        //Form2.instance.l3.Text = Form2.instance.l2.Text; //actualiza los mensajes enviados
-                        //Form2.instance.l2.Text = Form2.instance.l1.Text;
-                        //Form2.instance.l1.Text = Form2.instance.l8.Text;
-                        //Form2.instance.l8.Text = trozos[1];
                         break;
                     case 10:
                         Invoke(new Action(() =>
@@ -528,7 +526,7 @@ namespace Cliente
         //    }
         //}
 
-        private void EnvMSG_Click(object sender, EventArgs e)
+        private void EnvMSG_Click(object sender, EventArgs e) //Boton que envia el mensaje
         {
             string texto = textoChat.Text;
             string chatNombre = nombreChat.Text;
@@ -540,7 +538,7 @@ namespace Cliente
 
                 textoChat.Text = "";
                 nombreChat.Text = "";
-                string mensaje = "9-" + mensajeChat + "-" + name;
+                string mensaje = "9/" + mensajeChat + "/" + name;
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);
             }

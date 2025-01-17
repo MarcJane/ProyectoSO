@@ -24,6 +24,8 @@ CREATE TABLE historial(
 
 INSERT INTO jugador VALUES (1,'Marc','1234');
 INSERT INTO jugador VALUES (2,'Edgar','2222');
+INSERT INTO jugador VALUES (3,'Juan','1010');
+INSERT INTO jugador VALUES (4,'David','9999');
 
 INSERT INTO partida VALUES (1,2,'EUW');
 INSERT INTO partida VALUES (2,2,'EUW');

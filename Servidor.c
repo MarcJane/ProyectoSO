@@ -37,9 +37,9 @@ lPartidas listaPartidas;
 lConectados lista;
 
 int sockets[100];
-
 int i = 0;
-
+char host[30] = "localhost";
+char contrasql[30] = "mysql";
 
 void inicializarPartidas (lPartidas *listaPartidas);
 int tPartida (char invitados[60], int numJ, lPartidas *listaPartidas, lConectados *lista);
@@ -410,7 +410,7 @@ void acceso(char nombre[25], char contrasena[25], char respuesta[512]) //Funcion
 			mysql_errno(conn), mysql_error(conn));
 		exit(1);
 	}
-	conn = mysql_real_connect(conn, "localhost", "root", "mysql", "M6_BBDDJuego", 0, NULL, 0);
+	conn = mysql_real_connect(conn, host, "root", contrasql, "M6_BBDDJuego", 0, NULL, 0);
 	if (conn == NULL)
 	{
 		printf("Error al inicializar la conexion: %u %s\n",
@@ -535,7 +535,7 @@ void jugadorPartidaMasLarga(char fecha[11], char respuesta[512]) //Funcion que t
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "localhost","root", "mysql","M6_BBDDJuego", 0, NULL, 0);
+	conn = mysql_real_connect (conn, host,"root", contrasql,"M6_BBDDJuego", 0, NULL, 0);
 	if (conn==NULL)
 	{
 		printf ("Error al inicializar la conexion: %u %s\n", 
@@ -603,7 +603,7 @@ void jugadorMasPartidas(char fecha[11], char respuesta[512]) //Funcion que dice 
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", "M6_BBDDJuego", 0, NULL, 0);
+	conn = mysql_real_connect (conn, host,"root", contrasql, "M6_BBDDJuego", 0, NULL, 0);
 	if (conn==NULL)
 	{
 		printf ("Error al inicializar la conexion: %u %s\n", 
@@ -662,7 +662,7 @@ void winratio(char nombre[25], char fecha[11], char respuesta[512]) //Funcion qu
 				mysql_errno(conn), mysql_error(conn));
 		exit (1);
 	}
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", "M6_BBDDJuego", 0, NULL, 0);
+	conn = mysql_real_connect (conn, host,"root", contrasql, "M6_BBDDJuego", 0, NULL, 0);
 	if (conn==NULL)
 	{
 		printf ("Error al inicializar la conexion: %u %s\n", 
@@ -744,7 +744,7 @@ void registrar(char nombre[25], char contrasena[25], char respuesta[512]) //Func
 			mysql_errno(conn), mysql_error(conn));
 		exit(1);
 	}
-	conn = mysql_real_connect(conn, "localhost", "root", "mysql", "M6_BBDDJuego", 0, NULL, 0);
+	conn = mysql_real_connect(conn, host, "root", contrasql, "M6_BBDDJuego", 0, NULL, 0);
 	if (conn == NULL)
 	{
 		printf("Error al inicializar la conexion: %u %s\n",

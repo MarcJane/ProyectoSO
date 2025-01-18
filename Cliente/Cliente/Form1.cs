@@ -254,6 +254,10 @@ namespace Cliente
             IPAddress direc = IPAddress.Parse("192.168.56.101");
             IPEndPoint ipep = new IPEndPoint(direc, 50025);
 
+            ////IP y puerto de shiva
+            //IPAddress direc = IPAddress.Parse("10.4.119.5");
+            //IPEndPoint ipep = new IPEndPoint(direc, 50025);
+
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
@@ -289,6 +293,10 @@ namespace Cliente
         {
             IPAddress direc = IPAddress.Parse("192.168.56.101");
             IPEndPoint ipep = new IPEndPoint(direc, 50025);
+
+            ////IP y puerto de shiva
+            //IPAddress direc = IPAddress.Parse("10.4.119.5");
+            //IPEndPoint ipep = new IPEndPoint(direc, 50025);
 
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try

@@ -58,11 +58,11 @@ namespace Cliente
                     mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
                     trozos = Encoding.ASCII.GetString(msg2).Split('-');
                 }
-                MessageBox.Show(mensaje);
+               
                 switch (codigo) //dependiendo del codigo hace la accion pedida por el servidor
                 {
                     case 0:
-                        if (mensaje == "0-0") //el usuario se conecta y seha logeado de forma correcta o le informa de que ha introduciodo mal el nombre o la contraseña
+                        if (mensaje == "0-0") //el usuario se conecta y se ha logeado de forma correcta o le informa de que ha introduciodo mal el nombre o la contraseña
                         {
                             Invoke(new Action(() =>
                             {

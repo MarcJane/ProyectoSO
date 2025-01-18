@@ -56,6 +56,8 @@ namespace Cliente
             this.textoChat = new System.Windows.Forms.TextBox();
             this.labelChat = new System.Windows.Forms.Label();
             this.EnvMSG = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -169,7 +171,7 @@ namespace Cliente
             this.lConectados});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1089, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1089, 30);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -298,11 +300,31 @@ namespace Cliente
             this.EnvMSG.UseVisualStyleBackColor = true;
             this.EnvMSG.Click += new System.EventHandler(this.EnvMSG_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(817, 163);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(62, 17);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "Nombre:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(943, 163);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(65, 17);
+            this.label11.TabIndex = 27;
+            this.label11.Text = "Mensaje:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1089, 536);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.EnvMSG);
             this.Controls.Add(this.labelChat);
             this.Controls.Add(this.textoChat);
@@ -369,6 +391,8 @@ namespace Cliente
         private System.Windows.Forms.TextBox textoChat;
         private System.Windows.Forms.Label labelChat;
         private System.Windows.Forms.Button EnvMSG;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }
 

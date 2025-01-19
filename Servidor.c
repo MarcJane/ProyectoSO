@@ -334,14 +334,19 @@ void *atenderCliente (void *socket)
 			p = strtok(NULL, "-");
 			p = strtok(NULL, "-");			
 			sprintf(respuesta, "12-%s", p);
-			while (n < 4)
+			for (n = 0; n < 4; n++)
 			{
-				if(listaPartidas.partida[partida].aceptado[n] == 1)
+				if (listaPartidas.partida[partida].aceptado[n] == 1)
 				{
-					write (listaPartidas.partida[partida].socket[n], respuesta, strlen(respuesta));
+					printf("Enviando a socket[%d]: %d\n", n, listaPartidas.partida[partida].socket[n]);
+					int bytesEscritos = write(listaPartidas.partida[partida].socket[n], respuesta, strlen(respuesta));
+					if (bytesEscritos < 0)
+					{
+						perror("Error enviando mensaje al cliente");
+					}
 				}
-				n++;
 			}
+			
 			pthread_mutex_unlock(&mutex);
 		}
 		if (codigo == 0 || codigo == 4 || codigo == 5)

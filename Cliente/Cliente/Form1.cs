@@ -245,10 +245,12 @@ namespace Cliente
                         //Recivir una peticion que te permita aceptar o denegar partida y envie una peticion 7-Aceptada o 7-Rechazada
                         break;
                     case 12:
-                        Form2.instance.l8.Text = Form2.instance.l7.Text;        //actualiza los mensajes enviados 
+                        string chatMensaje = trozos[1];
+
+                        Form2.instance.l8.Text = Form2.instance.l7.Text;
                         Form2.instance.l7.Text = Form2.instance.l6.Text;
                         Form2.instance.l6.Text = Form2.instance.l5.Text;
-                        Form2.instance.l5.Text = trozos[1];
+                        Form2.instance.l5.Text = chatMensaje;
                         break;
                 }
             }
@@ -415,9 +417,16 @@ namespace Cliente
         }
         public void enviarMensaje() //envia los mensajes del chat al servidor
         {
-            string peticion = "12-" + partida + "-" + USER.Text + ": " + Form2.instance.tB.Text;
-            byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
-            server.Send(enviar);
+            if (server != null && server.Connected)
+            {
+                string peticion = "12-" + partida + "-" + USER.Text + ": " + Form2.instance.tB.Text;
+                byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
+                server.Send(enviar);
+            }
+            else
+            {
+                MessageBox.Show("No estás conectado al servidor.");
+            }
         }
         private void listaInvitacion(string nombre)        //guarda la informacion de la gente que vas a invitar a jugar
         {
@@ -517,26 +526,6 @@ namespace Cliente
             label9.Visible = false;
             invitados = null;
         }
-        //private void textoChat_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    if (e.KeyChar == (char)Keys.Enter)
-        //    {
-        //        string texto = textoChat.Text;
-        //        string chatNombre = nombreChat.Text;
-        //        if (texto != "")
-        //        {
-        //            string mensajeChat = texto;
-
-        //            string name = chatNombre;
-
-        //            textoChat.Text = "";
-        //            nombreChat.Text = "";
-        //            string mensaje = "9/" + mensajeChat + "/" + name;
-        //            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-        //            server.Send(msg);
-        //        }
-        //    }
-        //}
 
         private void EnvMSG_Click(object sender, EventArgs e) //Boton que envia el mensaje
         {

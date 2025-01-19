@@ -231,7 +231,7 @@ namespace Cliente
                         }
                         break;
                     case 9:
-                        mensaje = trozos[1].Split('\0')[0];
+                        mensaje = trozos[1].Split('\0')[0]; 
 
                         string usuario = trozos[2];
                         string texto = ">>" + usuario + "-" + mensaje + "\n";
@@ -550,7 +550,7 @@ namespace Cliente
                 string text = ">>" + chatNombre + "-" + texto + "\n";
                 labelChat.Text = text;
 
-                string mensaje = "9/" + mensajeChat + "/" + name;
+                string mensaje = "9/" + mensajeChat + "-" + name;
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);
             }

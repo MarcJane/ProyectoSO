@@ -304,6 +304,29 @@ void *atenderCliente (void *socket)
 			}
 		}
 		}
+		else if(codigo ==10)
+		{
+			//reenvia mensaje
+			char mensaje[200];
+			p = strtok(NULL, "-");
+			if(p != NULL)
+			{
+				strcpy(mensaje, p);
+				char usuario[200];
+				p = strtok(NULL, "-");
+				if(p != NULL)
+				{
+					strcpy(usuario, p);
+					sprintf(respuesta, "10-%s-%s", mensaje, usuario);
+					printf("Mensaje: %s\n", respuesta);
+					int j;
+					for(j = 0; j <lista.num; j++)
+					{
+						write(sockets[j], respuesta, strlen(respuesta));
+					}
+				}
+			}
+		}
 		if (codigo == 0 || codigo == 4 || codigo == 5)
 		{
 			pthread_mutex_lock(&mutex); //devuelve la lista de conectados cada vez que se actualiza
@@ -780,5 +803,6 @@ void registrar(char nombre[25], char contrasena[25], char respuesta[512]) //Func
 	}
 
 }
+
 
 

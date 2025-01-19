@@ -245,12 +245,10 @@ namespace Cliente
                         //Recivir una peticion que te permita aceptar o denegar partida y envie una peticion 7-Aceptada o 7-Rechazada
                         break;
                     case 12:
-                        string chatMensaje = trozos[1];
-
                         Form2.instance.l8.Text = Form2.instance.l7.Text;
                         Form2.instance.l7.Text = Form2.instance.l6.Text;
                         Form2.instance.l6.Text = Form2.instance.l5.Text;
-                        Form2.instance.l5.Text = chatMensaje;
+                        Form2.instance.l5.Text = trozos[1];
                         break;
                 }
             }

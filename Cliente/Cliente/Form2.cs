@@ -45,37 +45,42 @@ namespace Cliente
 
         private void ENVIAR_Click(object sender, EventArgs e) //Envia mensaje del texbox al Chat
         {
-            string mensaje = textBox1.Text;
+            // Opcional: Envía el mensaje al servidor o realiza otra acción
+            Form1.instance.enviarMensaje();
 
-            if (!string.IsNullOrWhiteSpace(mensaje)) // Verifica que el mensaje no esté vacío
-            {
-                // Verificar quién envió el mensaje usando los RadioButtons
-                if (J1.Checked)
-                {
-                    l5.Text = $"Jugador 1: {mensaje}"; // Mostrar mensaje en Label1
-                }
-                else if (J2.Checked)
-                {
-                    l6.Text = $"Jugador 2: {mensaje}"; // Mostrar mensaje en Label2
-                }
-                else
-                {
-                    MessageBox.Show("Por favor, selecciona un jugador antes de enviar el mensaje.",
-                                    "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+            // Limpia el TextBox después de enviar
+            textBox1.Clear();
+            //string mensaje = textBox1.Text;
 
-                // Opcional: Envía el mensaje al servidor o realiza otra acción
-                Form1.instance.enviarMensaje();
+            //if (!string.IsNullOrWhiteSpace(mensaje)) // Verifica que el mensaje no esté vacío
+            //{
+            //    // Verificar quién envió el mensaje usando los RadioButtons
+            //    if (J1.Checked)
+            //    {
+            //        l5.Text = $"Jugador 1: {mensaje}"; // Mostrar mensaje en Label1
+            //    }
+            //    else if (J2.Checked)
+            //    {
+            //        l6.Text = $"Jugador 2: {mensaje}"; // Mostrar mensaje en Label2
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Por favor, selecciona un jugador antes de enviar el mensaje.",
+            //                        "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //        return;
+            //    }
 
-                // Limpia el TextBox después de enviar
-                textBox1.Clear();
-            }
-            else
-            {
-                MessageBox.Show("El mensaje no puede estar vacío.",
-                                "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            //    // Opcional: Envía el mensaje al servidor o realiza otra acción
+            //    Form1.instance.enviarMensaje();
+
+            //    // Limpia el TextBox después de enviar
+            //    textBox1.Clear();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("El mensaje no puede estar vacío.",
+            //                    "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
         }
 
         private void EMPEZAR_Click(object sender, EventArgs e) //Empieza el juego

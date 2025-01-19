@@ -54,7 +54,7 @@ namespace Cliente
             // jugador1
             // 
             this.jugador1.AutoSize = true;
-            this.jugador1.Location = new System.Drawing.Point(101, 77);
+            this.jugador1.Location = new System.Drawing.Point(308, 59);
             this.jugador1.Name = "jugador1";
             this.jugador1.Size = new System.Drawing.Size(25, 17);
             this.jugador1.TabIndex = 0;
@@ -63,7 +63,7 @@ namespace Cliente
             // jugador2
             // 
             this.jugador2.AutoSize = true;
-            this.jugador2.Location = new System.Drawing.Point(518, 77);
+            this.jugador2.Location = new System.Drawing.Point(310, 131);
             this.jugador2.Name = "jugador2";
             this.jugador2.Size = new System.Drawing.Size(23, 17);
             this.jugador2.TabIndex = 1;
@@ -72,7 +72,7 @@ namespace Cliente
             // jugador3
             // 
             this.jugador3.AutoSize = true;
-            this.jugador3.Location = new System.Drawing.Point(518, 204);
+            this.jugador3.Location = new System.Drawing.Point(310, 91);
             this.jugador3.Name = "jugador3";
             this.jugador3.Size = new System.Drawing.Size(23, 17);
             this.jugador3.TabIndex = 2;
@@ -81,7 +81,7 @@ namespace Cliente
             // jugador4
             // 
             this.jugador4.AutoSize = true;
-            this.jugador4.Location = new System.Drawing.Point(104, 204);
+            this.jugador4.Location = new System.Drawing.Point(310, 166);
             this.jugador4.Name = "jugador4";
             this.jugador4.Size = new System.Drawing.Size(23, 17);
             this.jugador4.TabIndex = 3;
@@ -159,7 +159,7 @@ namespace Cliente
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(101, 94);
+            this.label1.Location = new System.Drawing.Point(67, 324);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 17);
             this.label1.TabIndex = 12;
@@ -168,7 +168,7 @@ namespace Cliente
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(518, 221);
+            this.label2.Location = new System.Drawing.Point(67, 302);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 17);
             this.label2.TabIndex = 13;
@@ -177,7 +177,7 @@ namespace Cliente
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(518, 94);
+            this.label3.Location = new System.Drawing.Point(67, 279);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 17);
             this.label3.TabIndex = 14;
@@ -186,7 +186,7 @@ namespace Cliente
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(101, 221);
+            this.label4.Location = new System.Drawing.Point(67, 252);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 17);
             this.label4.TabIndex = 15;

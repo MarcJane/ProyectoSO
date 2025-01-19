@@ -327,7 +327,7 @@ void *atenderCliente (void *socket)
 				}
 			}
 		}
-		else if(codigo == 11)
+		else if(codigo == 12)
 		{
 			pthread_mutex_lock(&mutex);		//envia los mensajes de chat al resto de jugadores en el juego
 			n = 0;

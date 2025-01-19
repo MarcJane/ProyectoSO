@@ -45,7 +45,7 @@ namespace Cliente
                 server.Receive(msg2);
                 string mensaje;
                 string[] trozos;
-                int codigo = 11;
+                int codigo = 12;
                 
                 try
                 {
@@ -230,21 +230,25 @@ namespace Cliente
                             Form2.instance.l4.ForeColor = Color.Green;
                         }
                         break;
-                    case 9:
-                        mensaje = trozos[1].Split('\0')[0]; 
+                    case 10:
+                        mensaje = trozos[1].Split('\0')[0]; //mensaje chat
 
                         string usuario = trozos[2];
-                        string texto = ">>" + usuario + "-" + mensaje + "\n";
+                        string texto = ">>" + usuario + "/" + mensaje + "\n";
                         labelChat.Text = texto;
                         break;
-                    case 10:
+                    case 11:
                         Invoke(new Action(() =>
                         {
                             Form2.instance.startAction();       //inicia la partida
                         }));
                         //Recivir una peticion que te permita aceptar o denegar partida y envie una peticion 7-Aceptada o 7-Rechazada
                         break;
-                    case 11:
+                    case 12:
+                        Form2.instance.l8.Text = Form2.instance.l7.Text;        //actualiza los mensajes enviados 
+                        Form2.instance.l7.Text = Form2.instance.l6.Text;
+                        Form2.instance.l6.Text = Form2.instance.l5.Text;
+                        Form2.instance.l5.Text = trozos[1];
                         break;
                 }
             }
@@ -411,7 +415,7 @@ namespace Cliente
         }
         public void enviarMensaje() //envia los mensajes del chat al servidor
         {
-            string peticion = "8-" + partida + "-" + USER.Text + ": " + Form2.instance.tB.Text;
+            string peticion = "12-" + partida + "-" + USER.Text + ": " + Form2.instance.tB.Text;
             byte[] enviar = System.Text.Encoding.ASCII.GetBytes(peticion);
             server.Send(enviar);
         }
@@ -546,11 +550,11 @@ namespace Cliente
 
                 textoChat.Text = "";
                 nombreChat.Text = "";
-                
+
                 string text = ">>" + chatNombre + "-" + texto + "\n";
                 labelChat.Text = text;
 
-                string mensaje = "9/" + mensajeChat + "-" + name;
+                string mensaje = "10/" + mensajeChat + "-" + name;
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);
             }

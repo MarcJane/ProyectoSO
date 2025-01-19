@@ -41,6 +41,14 @@ namespace Cliente
             this.label8 = new System.Windows.Forms.Label();
             this.EMPEZAR = new System.Windows.Forms.Button();
             this.CERRAR = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.J1 = new System.Windows.Forms.RadioButton();
+            this.J2 = new System.Windows.Forms.RadioButton();
+            this.J3 = new System.Windows.Forms.RadioButton();
+            this.J4 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // jugador1
@@ -59,7 +67,7 @@ namespace Cliente
             this.jugador2.Name = "jugador2";
             this.jugador2.Size = new System.Drawing.Size(23, 17);
             this.jugador2.TabIndex = 1;
-            this.jugador2.Text = "J1";
+            this.jugador2.Text = "J3";
             // 
             // jugador3
             // 
@@ -68,7 +76,7 @@ namespace Cliente
             this.jugador3.Name = "jugador3";
             this.jugador3.Size = new System.Drawing.Size(23, 17);
             this.jugador3.TabIndex = 2;
-            this.jugador3.Text = "J3";
+            this.jugador3.Text = "J2";
             // 
             // jugador4
             // 
@@ -77,7 +85,7 @@ namespace Cliente
             this.jugador4.Name = "jugador4";
             this.jugador4.Size = new System.Drawing.Size(23, 17);
             this.jugador4.TabIndex = 3;
-            this.jugador4.Text = "J2";
+            this.jugador4.Text = "J4";
             // 
             // textBox1
             // 
@@ -148,11 +156,99 @@ namespace Cliente
             this.CERRAR.UseVisualStyleBackColor = true;
             this.CERRAR.Click += new System.EventHandler(this.CERRAR_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(101, 94);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(518, 221);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 17);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "label2";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(518, 94);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 17);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "label3";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(101, 221);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 17);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "label4";
+            // 
+            // J1
+            // 
+            this.J1.AutoSize = true;
+            this.J1.Location = new System.Drawing.Point(61, 368);
+            this.J1.Name = "J1";
+            this.J1.Size = new System.Drawing.Size(89, 21);
+            this.J1.TabIndex = 20;
+            this.J1.TabStop = true;
+            this.J1.Text = "Jugador1";
+            this.J1.UseVisualStyleBackColor = true;
+            // 
+            // J2
+            // 
+            this.J2.AutoSize = true;
+            this.J2.Location = new System.Drawing.Point(172, 370);
+            this.J2.Name = "J2";
+            this.J2.Size = new System.Drawing.Size(89, 21);
+            this.J2.TabIndex = 21;
+            this.J2.TabStop = true;
+            this.J2.Text = "Jugador2";
+            this.J2.UseVisualStyleBackColor = true;
+            // 
+            // J3
+            // 
+            this.J3.AutoSize = true;
+            this.J3.Location = new System.Drawing.Point(61, 397);
+            this.J3.Name = "J3";
+            this.J3.Size = new System.Drawing.Size(89, 21);
+            this.J3.TabIndex = 22;
+            this.J3.TabStop = true;
+            this.J3.Text = "Jugador3";
+            this.J3.UseVisualStyleBackColor = true;
+            // 
+            // J4
+            // 
+            this.J4.AutoSize = true;
+            this.J4.Location = new System.Drawing.Point(172, 397);
+            this.J4.Name = "J4";
+            this.J4.Size = new System.Drawing.Size(89, 21);
+            this.J4.TabIndex = 23;
+            this.J4.TabStop = true;
+            this.J4.Text = "Jugador4";
+            this.J4.UseVisualStyleBackColor = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.J4);
+            this.Controls.Add(this.J3);
+            this.Controls.Add(this.J2);
+            this.Controls.Add(this.J1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.CERRAR);
             this.Controls.Add(this.EMPEZAR);
             this.Controls.Add(this.label8);
@@ -187,5 +283,13 @@ namespace Cliente
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button EMPEZAR;
         private System.Windows.Forms.Button CERRAR;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RadioButton J1;
+        private System.Windows.Forms.RadioButton J2;
+        private System.Windows.Forms.RadioButton J3;
+        private System.Windows.Forms.RadioButton J4;
     }
 }

@@ -279,7 +279,7 @@ void *atenderCliente (void *socket)
 		{
 			pthread_mutex_lock(&mutex);		//notifica de el inicio de la partida a los jugadores
 			n = 0;
-			sprintf(respuesta, "10-");
+			sprintf(respuesta, "11-");
 			while (n < 4)
 			{
 				if (listaPartidas.partida[partida].aceptado[n] == 1) {
@@ -291,33 +291,33 @@ void *atenderCliente (void *socket)
 		}
 		else if(codigo == 9)
 		{
-		char mensaje[200]; //envia mensaje al chat
-		p = strtok(NULL, "/");
-		if (p != NULL) {
-			strcpy(mensaje, p);
-			sprintf(respuesta, "9/%s", mensaje);
-			printf("Mensaje: %s\n", respuesta);
-			int j;
-			for (j = 0; j < lista.num; j++)
-			{
-				write(lista.conectados[j].socket, respuesta, strlen(respuesta));
+			char mensaje[200]; //envia mensaje al chat
+			p = strtok(NULL, "/");
+			if (p != NULL) {
+				strcpy(mensaje, p);
+				sprintf(respuesta, "9/%s", mensaje);
+				printf("Mensaje: %s\n", respuesta);
+				int j;
+				for (j = 0; j < lista.num; j++)
+				{
+					write(lista.conectados[j].socket, respuesta, strlen(respuesta));
+				}
 			}
-		}
 		}
 		else if(codigo ==10)
 		{
 			//reenvia mensaje
 			char mensaje[200];
-			p = strtok(NULL, "-");
+			p = strtok(NULL, "/");
 			if(p != NULL)
 			{
 				strcpy(mensaje, p);
 				char usuario[200];
-				p = strtok(NULL, "-");
+				p = strtok(NULL, "/");
 				if(p != NULL)
 				{
 					strcpy(usuario, p);
-					sprintf(respuesta, "10-%s-%s", mensaje, usuario);
+					sprintf(respuesta, "10/%s-%s", mensaje, usuario);
 					printf("Mensaje: %s\n", respuesta);
 					int j;
 					for(j = 0; j <lista.num; j++)
@@ -326,6 +326,23 @@ void *atenderCliente (void *socket)
 					}
 				}
 			}
+		}
+		else if(codigo == 11)
+		{
+			pthread_mutex_lock(&mutex);		//envia los mensajes de chat al resto de jugadores en el juego
+			n = 0;
+			p = strtok(NULL, "-");
+			p = strtok(NULL, "-");			
+			sprintf(respuesta, "12-%s", p);
+			while (n < 4)
+			{
+				if(listaPartidas.partida[partida].aceptado[n] == 1)
+				{
+					write (listaPartidas.partida[partida].socket[n], respuesta, strlen(respuesta));
+				}
+				n++;
+			}
+			pthread_mutex_unlock(&mutex);
 		}
 		if (codigo == 0 || codigo == 4 || codigo == 5)
 		{
